@@ -20,9 +20,14 @@ config/icon="res://icon.svg"
 Globals="*res://scripts/core/globals.gd"
 SoundManager="*res://scripts/core/sound_manager.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/github_to_itch/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
+"res://addons/": "blue",
 "res://data/": "green",
 "res://scenes/": "yellow",
 "res://scripts/": "pink",
@@ -30,6 +35,11 @@ folder_colors={
 "res://sound/": "red",
 "res://sprites/": "green"
 }
+
+[github_to_itch]
+
+config/itch_username="lunicosm"
+config/itch_project_name="ld57"
 
 [rendering]
 
