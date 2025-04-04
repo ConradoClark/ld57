@@ -13,7 +13,7 @@ env:
   IS_MAIN: ${{ contains(github.ref, 'main') }}
   PROJECT_NAME: ld57
   USER: lunicosm
-  WORKING_DIRECTORY:
+  WORKING_DIRECTORY: .
 jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
