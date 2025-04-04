@@ -48,14 +48,13 @@ jobs:
           mkdir -p ~/.local/share/godot/export_templates/4.4.stable
           mv ./templates/* ~/.local/share/godot/export_templates/4.4.stable
       - name: Export Web
-    run: |
-      mkdir -p ./release
-      ./godot --headless --path ./ --export-release "HTML5" ./release/index.html
-
+        run: |
+          mkdir -p ./release
+          ./godot --headless --path ./ --export-release "HTML5" ./release/index.html
       - uses: actions/upload-artifact@v2
-       with:
-        name: exports
-        path: exports
+        with:
+          name: exports
+          path: exports
   Release:
     needs: Export
     if: ${{ contains(github.ref, 'main') }}
