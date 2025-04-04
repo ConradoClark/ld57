@@ -35,7 +35,7 @@ jobs:
       - name: Upload to itch.io
         uses: dulvui/itchio-butler-upload@v0.0.1
         with:
-          working-directory: html5
+          working-directory: $WORKING_DIRECTORY
           api-key: $BUTLER_API_KEY
           user: $USER
           game: $PROJECT_NAME
