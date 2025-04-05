@@ -1,20 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://c42b8ofmsoyg1"]
+[gd_scene load_steps=9 format=3 uid="uid://c42b8ofmsoyg1"]
 
 [ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_ldj1t"]
+[ext_resource type="Script" uid="uid://c3vtu5ujlsg2m" path="res://scripts/objects/crystal/crystal.gd" id="2_8e50l"]
 [ext_resource type="Texture2D" uid="uid://b2yd33fcq2prm" path="res://sprites/crystal/crystal_sketch.png" id="2_poage"]
+[ext_resource type="Script" uid="uid://b5y7a2vbbnc5i" path="res://scripts/objects/object_spawner.gd" id="3_es1yo"]
 [ext_resource type="Texture2D" uid="uid://ck7n3t4ew3car" path="res://sprites/shadow.png" id="3_poage"]
+[ext_resource type="Texture2D" uid="uid://c86cjmh4yetsj" path="res://sprites/crystal/crystal_desaturated.png" id="4_yeg1p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yeg1p"]
+radius = 19.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8e50l"]
+radius = 9.0
 
 [node name="Crystal" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ldj1t")
 metadata/_custom_type_script = "uid://602p1o26m2d6"
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Crystal" type="Node" parent="." node_paths=PackedStringArray("active_sprite", "inactive_sprite", "area")]
+script = ExtResource("2_8e50l")
+active_sprite = NodePath("../Sprites/Sprite_Active")
+inactive_sprite = NodePath("../Sprites/Sprite_Inactive")
+match_key = "blue"
+area = NodePath("../Area2D")
+metadata/_custom_type_script = "uid://c3vtu5ujlsg2m"
+
+[node name="ObjectSpawner" type="Node" parent="." node_paths=PackedStringArray("sprite_group", "sprite", "hide_sprite", "shadow")]
+script = ExtResource("3_es1yo")
+sprite_group = NodePath("..")
+sprite = NodePath("../Sprites")
+hide_sprite = NodePath("../Sprites/Sprite_Active")
+shadow = NodePath("../Shadow")
+initial_y_offset = -50.0
+metadata/_custom_type_script = "uid://b5y7a2vbbnc5i"
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Sprite_Active" type="Sprite2D" parent="Sprites"]
 y_sort_enabled = true
 texture = ExtResource("2_poage")
 
+[node name="Sprite_Inactive" type="Sprite2D" parent="Sprites"]
+modulate = Color(1, 1, 1, 0)
+y_sort_enabled = true
+texture = ExtResource("4_yeg1p")
+
 [node name="Shadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.862745)
-z_index = -1
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -2
 position = Vector2(-1, 23)
 texture = ExtResource("3_poage")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_yeg1p")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 12)
+shape = SubResource("CircleShape2D_8e50l")

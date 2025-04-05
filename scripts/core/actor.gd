@@ -11,3 +11,7 @@ func _ready():
 
 func set_param(key: String, value: Variant):
   parameters[key] = value
+
+func get_param(key: String):
+  if parameters.has(key): return parameters[key]
+  return null

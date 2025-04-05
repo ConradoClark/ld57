@@ -1,8 +1,11 @@
 extends Node
 
 class Constants:
+  class Screen:
+    const Size = Vector2(640,360)
   class ActorParams:
     const Player = "player"
+    const Room = "room"
 
 func get_actor(node: Node) -> Actor:
   if node is Actor: return node as Actor

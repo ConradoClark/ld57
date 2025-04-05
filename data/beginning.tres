@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RoomDefinition" load_steps=2 format=3 uid="uid://c4bwikypa0rb2"]
+
+[ext_resource type="Script" uid="uid://dyufqd6n5frbh" path="res://scripts/room/room_definition.gd" id="1_q68vx"]
+
+[resource]
+script = ExtResource("1_q68vx")
+difficulty = 0
+min_colors = 2
+max_colors = 2
+min_crystals = 4
+max_crystals = 4
+files = Array[String]([])
+metadata/_custom_type_script = "uid://dyufqd6n5frbh"

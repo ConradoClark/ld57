@@ -30,6 +30,7 @@ func clear():
   crystals.clear()
 
 func trigger(crystal: Crystal):
+  if crystal.triggered: return
   if matching_count >= 2: return
   matching_count += 1
   await crystal.trigger()

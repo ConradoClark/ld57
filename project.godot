@@ -19,8 +19,9 @@ config/icon="res://icon.svg"
 
 Globals="*res://scripts/core/globals.gd"
 SoundManager="*res://scripts/core/sound_manager.gd"
-CrystalEvents="*res://scripts/objects/crystal_events.gd"
+CrystalEvents="*res://scripts/objects/crystal/crystal_events.gd"
 PlayerEvents="*res://scripts/character/player_events.gd"
+RoomEvents="*res://scripts/room/room_events.gd"
 
 [display]
 
@@ -35,11 +36,14 @@ window/stretch/scale_mode="integer"
 
 folder_colors={
 "res://data/": "green",
+"res://fonts/": "red",
+"res://release/": "gray",
 "res://scenes/": "yellow",
 "res://scripts/": "pink",
 "res://shaders/": "pink",
 "res://sound/": "red",
-"res://sprites/": "green"
+"res://sprites/": "green",
+"res://tilesets/": "green"
 }
 
 [input]
@@ -74,9 +78,17 @@ action={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Obstacles"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Crystals"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 textures/canvas_textures/default_texture_repeat=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

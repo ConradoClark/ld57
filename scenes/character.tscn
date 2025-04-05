@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2blx0egodcuv"]
+[gd_scene load_steps=8 format=3 uid="uid://d2blx0egodcuv"]
 
 [ext_resource type="Texture2D" uid="uid://clw1i8odmko7m" path="res://sprites/character/character_sketch.png" id="1_agfs1"]
 [ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_rkhd4"]
 [ext_resource type="Script" uid="uid://do3e012uyo6ih" path="res://scripts/character/player.gd" id="2_my7n2"]
 [ext_resource type="Script" uid="uid://dqyoxg0v7cbt8" path="res://scripts/character/character_controller.gd" id="3_dp8ca"]
+[ext_resource type="Script" uid="uid://dwbcia7pvxk3b" path="res://scripts/character/character_spawner.gd" id="4_0lw5n"]
 [ext_resource type="Texture2D" uid="uid://dwpl3y6ospk1a" path="res://sprites/character/character_shadow.png" id="5_dp8ca"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkhd4"]
@@ -15,7 +16,7 @@ metadata/_custom_type_script = "uid://602p1o26m2d6"
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("2_my7n2")
-speed = 100.0
+speed = 150.0
 metadata/_custom_type_script = "uid://do3e012uyo6ih"
 
 [node name="CharacterController" type="Node" parent="." node_paths=PackedStringArray("body")]
@@ -23,8 +24,20 @@ script = ExtResource("3_dp8ca")
 body = NodePath("../CharacterBody2D")
 metadata/_custom_type_script = "uid://dqyoxg0v7cbt8"
 
+[node name="CharacterSpawner" type="Node" parent="." node_paths=PackedStringArray("controller", "sprite_group", "sprite", "shadow")]
+script = ExtResource("4_0lw5n")
+controller = NodePath("../CharacterController")
+sprite_group = NodePath("../CharacterBody2D/Sprite")
+sprite = NodePath("../CharacterBody2D/Sprite/Sprite")
+shadow = NodePath("../CharacterBody2D/Sprite/Shadow")
+initial_y_offset = -100.0
+float_magnitude = 10.0
+metadata/_custom_type_script = "uid://dwbcia7pvxk3b"
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 y_sort_enabled = true
+collision_layer = 2
+collision_mask = 5
 
 [node name="Sprite" type="Node2D" parent="CharacterBody2D"]
 y_sort_enabled = true
@@ -34,7 +47,8 @@ y_sort_enabled = true
 texture = ExtResource("1_agfs1")
 
 [node name="Shadow" type="Sprite2D" parent="CharacterBody2D/Sprite"]
-z_index = -1
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -2
 position = Vector2(0, 29)
 texture = ExtResource("5_dp8ca")
 
