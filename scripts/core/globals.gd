@@ -1,8 +1,11 @@
 extends Node
 
+class Constants:
+  class ActorParams:
+    const Player = "player"
+
 func get_actor(node: Node) -> Actor:
   if node is Actor: return node as Actor
-  var found_actor = false
   var current_node = node
   var parent = current_node.get_parent()
   while parent != null:

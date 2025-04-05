@@ -1,9 +1,53 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0q60edoivvkh"]
+[gd_scene load_steps=5 format=3 uid="uid://c0q60edoivvkh"]
 
-[ext_resource type="Texture2D" uid="uid://dy3fcbhl8hf4n" path="res://icon.svg" id="1_7an68"]
+[ext_resource type="PackedScene" uid="uid://c42b8ofmsoyg1" path="res://scenes/objects/crystal.tscn" id="3_jmfav"]
+[ext_resource type="Shader" uid="uid://chqun1l6n18es" path="res://shaders/crt.gdshader" id="3_k27tg"]
+[ext_resource type="PackedScene" uid="uid://d2blx0egodcuv" path="res://scenes/character.tscn" id="4_jmfav"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmfav"]
+shader = ExtResource("3_k27tg")
+shader_parameter/resolution = Vector2(640, 360)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 1.0
+shader_parameter/noise_amount = 0.0
+shader_parameter/interference_amount = 0.524
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 1.348
+shader_parameter/vignette_intensity = 0.445
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 8.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
 
 [node name="Node2D" type="Node2D"]
+y_sort_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(502, 287)
-texture = ExtResource("1_7an68")
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -10
+custom_minimum_size = Vector2(640, 360)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="Character" parent="." instance=ExtResource("4_jmfav")]
+position = Vector2(339, 175)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_jmfav")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crystal" parent="." instance=ExtResource("3_jmfav")]
+position = Vector2(191, 258)

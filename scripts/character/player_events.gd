@@ -1,0 +1,4 @@
+extends Node
+
+signal on_player_interact
+signal on_player_end_interaction
