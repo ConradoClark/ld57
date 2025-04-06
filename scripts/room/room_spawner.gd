@@ -2,6 +2,7 @@ extends Node
 
 class_name RoomSpawner
 
+@export var falling_particles: GPUParticles2D
 @export var container: Node2D
 @export var load_delay: float
 @export var crystal_loader: CrystalLoader
@@ -10,6 +11,7 @@ class_name RoomSpawner
 var scene: PackedScene
 var timer: Timer
 var loaded: bool
+var first: bool = true
 
 func _ready():
   timer = Timer.new()
@@ -28,7 +30,13 @@ func _on_clear():
   timer.start()
   
 func load_level():
+  falling_particles.emitting = true
+  if not first:
+    await PlayerEvents.on_ready_to_next_level
+  else:
+    first = false
   SfxBank.load_game_sfx()
+  UpgradeCompendium.load_upgrades()
   var difficulty = Globals.player.difficulty
   var files = presets[difficulty].files
   var chosen = randi_range(0, len(files)-1)
@@ -38,6 +46,7 @@ func load_level():
 func _on_timeout():
   while not loaded:
     await get_tree().process_frame
+  falling_particles.emitting = false
   var instance = scene.instantiate() as Actor
   instance.global_position = Globals.Constants.Screen.Size*0.5
   container.add_child(instance)

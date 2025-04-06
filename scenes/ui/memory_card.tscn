@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnnf8et68jc7h"]
+
+[ext_resource type="FontFile" uid="uid://dijpwwxrvqrda" path="res://fonts/NotJamMonoClean11_SmallCaps.ttf" id="1_7a2am"]
+[ext_resource type="FontFile" uid="uid://w5xxeturl8e7" path="res://fonts/Not Jam Mono Clean 8.ttf" id="2_5pdvf"]
+[ext_resource type="Script" uid="uid://tm87i58uvdnh" path="res://scripts/ui/memory_card.gd" id="2_lt7xh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oi40j"]
+bg_color = Color(0.988235, 0.988235, 0.988235, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.501961, 0.337255, 0.831373, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_oi40j"]
+font = ExtResource("1_7a2am")
+font_size = 11
+font_color = Color(0.501961, 0.337255, 0.831373, 1)
+outline_size = 4
+outline_color = Color(0.988235, 0.988235, 0.988235, 1)
+shadow_size = 2
+shadow_color = Color(0.988235, 0.988235, 0.988235, 1)
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_trq4k"]
+font = ExtResource("2_5pdvf")
+font_size = 8
+font_color = Color(0.105882, 0.113725, 0.203922, 1)
+outline_size = 4
+outline_color = Color(0.768627, 0.780392, 0.933333, 1)
+shadow_size = 0
+shadow_color = Color(0.988235, 0.988235, 0.988235, 1)
+
+[node name="MemoryCard" type="VBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oi40j")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel/MarginContainer"]
+position = Vector2(0, 1)
+autoplay = "default"
+centered = false
+
+[node name="CardTitle" type="Label" parent="."]
+layout_mode = 2
+text = "aaaa"
+label_settings = SubResource("LabelSettings_oi40j")
+horizontal_alignment = 1
+
+[node name="CardName" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+text = "I used to aaaaad sadadasd"
+label_settings = SubResource("LabelSettings_trq4k")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MemoryCard" type="Node" parent="." node_paths=PackedStringArray("reference", "panel", "image", "title", "thought")]
+script = ExtResource("2_lt7xh")
+reference = NodePath("..")
+panel = NodePath("../Panel")
+image = NodePath("../Panel/MarginContainer/AnimatedSprite2D")
+title = NodePath("../CardTitle")
+thought = NodePath("../CardName")
+selected_color = Color(0.862745, 0.976471, 0.686275, 1)
+metadata/_custom_type_script = "uid://tm87i58uvdnh"

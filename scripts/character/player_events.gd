@@ -3,3 +3,7 @@ extends Node
 signal on_player_interact
 signal on_player_end_interaction
 signal on_brainpower_pellet_recover
+signal on_brainpower_transfer
+signal on_ready_to_next_level
+signal on_memory_unlock
+signal on_memory_picked

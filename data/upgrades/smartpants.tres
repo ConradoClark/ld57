@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=3 format=3 uid="uid://dbrnx744wo4i"]
+
+[ext_resource type="SpriteFrames" uid="uid://bbak06re06mrc" path="res://data/sprite_frames/smartpants.tres" id="1_qu4id"]
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="1_uc2ht"]
+
+[resource]
+script = ExtResource("1_uc2ht")
+title = "Smart Pants"
+thought = "I graduated from college"
+description = "Increases your max brainpower"
+frames = ExtResource("1_qu4id")
+available_from_difficulty = 0
+is_evolution = false
+action = "uid://pu5bsgqihx23"
+lore = "She studied [pulse]computer science[/pulse]. Between the 0s and the 1s, there was something she liked about it. Something guarded deep within. The idea that you can create [color=c4c7ee]something[/color] that can do things by itself is magical, dare I say [wave]divine[/wave]."
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

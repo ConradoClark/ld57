@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=3 format=3 uid="uid://c0btf7ojfully"]
+
+[ext_resource type="SpriteFrames" uid="uid://dovl1va1xysxo" path="res://data/sprite_frames/runnershigh.tres" id="1_8whfv"]
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="2_6o1mq"]
+
+[resource]
+script = ExtResource("2_6o1mq")
+title = "Runner's High II"
+thought = "I ran a marathon"
+description = "Further increases your speed"
+frames = ExtResource("1_8whfv")
+available_from_difficulty = 2
+is_evolution = true
+action = "uid://eaha3gvq060p"
+lore = "She ran a half marathon back in the day, in a cosplay costume of a [wave]very popular[/wave][color=f6c65e] yellow mouse[/color]. No one could believe it, running more than 10 miles in that huge and clumsy costume. She told us it wasn't about determination, or even practice: it was all about the [wave]meme potential[/wave]. She won the race."
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

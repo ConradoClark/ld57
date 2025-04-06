@@ -61,9 +61,14 @@ func _ready():
 func _audio_finished(stream: AudioStreamPlayer):
  free.append(stream)
 
-func play_sound(sound: AudioStream, min_pitch: float = 1., max_pitch: float = 1.):
+func play_sound(sound: AudioStream, min_pitch: float = 1., max_pitch: float = 1.) -> AudioStreamPlayer:
   if free.is_empty(): return
   var player = free.pop_front()
   player.pitch_scale = randf_range(min_pitch, max_pitch)
   player.stream = sound
   player.play()
+  return player
+
+func stop_sound(player: AudioStreamPlayer):
+  player.stop()
+  free.append(player)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=3 format=3 uid="uid://ci3314jbwhaar"]
+
+[ext_resource type="SpriteFrames" uid="uid://bbak06re06mrc" path="res://data/sprite_frames/smartpants.tres" id="1_xu1h8"]
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="2_sajgd"]
+
+[resource]
+script = ExtResource("2_sajgd")
+title = "Smart Pants II"
+thought = "Master of science"
+description = "Further increases your max brainpower"
+frames = ExtResource("1_xu1h8")
+available_from_difficulty = 2
+is_evolution = false
+action = "uid://pu5bsgqihx23"
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

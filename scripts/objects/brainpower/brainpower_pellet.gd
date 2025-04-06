@@ -6,7 +6,7 @@ class_name BrainpowerPellet
 @export var sprite: Node2D
 var actor:Actor
 var tween: Tween
-var target_pos = Vector2(320, 32)
+@export var target_pos = Vector2(320, 32)
 
 signal pellet_done
 

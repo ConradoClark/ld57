@@ -24,6 +24,8 @@ PlayerEvents="*res://scripts/character/player_events.gd"
 RoomEvents="*res://scripts/room/room_events.gd"
 SfxBank="*res://scripts/core/sfx_bank.gd"
 MusicManager="*res://scripts/core/music_manager.gd"
+UpgradeCompendium="*res://scripts/upgrades/upgrade_compendium.gd"
+MemoryCardEvents="*res://scripts/ui/memory_card_events.gd"
 
 [display]
 

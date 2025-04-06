@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=4 format=3 uid="uid://cj7wq7ddkem2w"]
+
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="1_d5njt"]
+[ext_resource type="SpriteFrames" uid="uid://dovl1va1xysxo" path="res://data/sprite_frames/runnershigh.tres" id="1_la8kq"]
+[ext_resource type="Resource" uid="uid://c0btf7ojfully" path="res://data/upgrades/runnershigh2.tres" id="3_oqf5w"]
+
+[resource]
+script = ExtResource("1_d5njt")
+title = "Runner's High"
+thought = "I used to jog"
+description = "Increases your movement speed"
+frames = ExtResource("1_la8kq")
+available_from_difficulty = 0
+is_evolution = false
+upgrade_into = ExtResource("3_oqf5w")
+action = "uid://eaha3gvq060p"
+lore = "She always liked [wave]running[/wave]. Something about the [color=c4c7ee]wind[/color], the [color=dcf9af]trees[/color], the fresh air. Something about escaping into the world, and out of herself. The [color=dcf9af]park[/color], that once made all of us forget, is now permanently engraved into our [pulse]memories[/pulse]."
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

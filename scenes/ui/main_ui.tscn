@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqnwl17cwypai"]
+[gd_scene load_steps=16 format=3 uid="uid://cqnwl17cwypai"]
 
 [ext_resource type="Texture2D" uid="uid://b87urcpphwcau" path="res://sprites/ui/Brainpower_green.png" id="1_hnesk"]
 [ext_resource type="Shader" uid="uid://ck0yj8paggr3w" path="res://shaders/colorize.gdshader" id="1_yc0ux"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://moup6kofto2m" path="res://sprites/ui/Brainpower_red.png" id="5_t0li6"]
 [ext_resource type="Texture2D" uid="uid://bk85ylhhqci7l" path="res://sprites/ui/memory_purple.png" id="7_oxwcw"]
 [ext_resource type="Script" uid="uid://uyfdy0m0l2wy" path="res://scripts/ui/ui_container.gd" id="7_t0li6"]
+[ext_resource type="Script" uid="uid://dtpfbgynm4y1p" path="res://scripts/ui/memory_meter.gd" id="9_b65ll"]
+[ext_resource type="Script" uid="uid://c2vu6xojcjdeo" path="res://scripts/ui/memory_card_menu.gd" id="11_m82f4"]
+[ext_resource type="FontFile" uid="uid://crkboln74tr5e" path="res://fonts/Not Jam Giant UI 22.ttf" id="11_oi40j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b65ll"]
 shader = ExtResource("1_yc0ux")
@@ -17,6 +20,16 @@ shader_parameter/color = Color(0.988235, 0.988235, 0.988235, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yc0ux"]
 shader = ExtResource("1_yc0ux")
 shader_parameter/color = Color(0.988235, 0.988235, 0.988235, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aa6wj"]
+font = ExtResource("4_travt")
+font_size = 11
+font_color = Color(0.988235, 0.988235, 0.988235, 1)
+outline_size = 3
+outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+shadow_size = 0
+shadow_color = Color(0.988235, 0.988235, 0.988235, 1)
+shadow_offset = Vector2(0, 0)
 
 [node name="MainUi" type="CanvasLayer"]
 
@@ -145,12 +158,20 @@ modulate = Color(0.768627, 0.780392, 0.933333, 1)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 19)
 layout_mode = 2
-offset_left = 4.0
+offset_left = 3.0
 offset_top = 6.0
-offset_right = 95.0
+offset_right = 5.0
 offset_bottom = 25.0
 texture = ExtResource("2_l8t6x")
 stretch_mode = 1
+
+[node name="MemoryMeter" type="Node" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/NinePatchRect" node_paths=PackedStringArray("meter", "border")]
+script = ExtResource("9_b65ll")
+meter = NodePath("../TextureRect")
+border = NodePath("..")
+meter_min_size_x = 1.0
+meter_max_size_x = 92.0
+metadata/_custom_type_script = "uid://dtpfbgynm4y1p"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -186,3 +207,130 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_t0li6")
 metadata/_custom_type_script = "uid://uyfdy0m0l2wy"
+
+[node name="MemoryUnlockScreen" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MemoryCardMenu" type="Node" parent="Control/MemoryUnlockScreen" node_paths=PackedStringArray("mem_unlocked", "pick_memory", "screen", "container", "card_description", "memory_text", "press_any")]
+script = ExtResource("11_m82f4")
+mem_unlocked = NodePath("../MarginContainer/VBoxContainer/MemUnlocked")
+pick_memory = NodePath("../MarginContainer/VBoxContainer/PickMemory")
+screen = NodePath("..")
+container = NodePath("../MarginContainer/VBoxContainer/HBoxContainer")
+card_description = NodePath("../MarginContainer/VBoxContainer/CardDescription")
+memory_text = NodePath("../MarginContainer/VBoxContainer/MemoryText")
+press_any = NodePath("../MarginContainer/VBoxContainer/Press Any")
+metadata/_custom_type_script = "uid://c2vu6xojcjdeo"
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MemoryUnlockScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MemoryUnlockScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="MemUnlocked" type="RichTextLabel" parent="Control/MemoryUnlockScreen/MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("11_oi40j")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[wave]MEMORY UNLOCKED!"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PickMemory" type="RichTextLabel" parent="Control/MemoryUnlockScreen/MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_travt")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "PICK A MEMORY"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MemoryUnlockScreen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="MemoryText" type="RichTextLabel" parent="Control/MemoryUnlockScreen/MarginContainer/VBoxContainer"]
+visible = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_travt")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "She always liked [wave]running[/wave]. Something about the [color=c4c7ee]wind[/color], the [color=dcf9af]trees[/color], the fresh air. Something about escaping into the world, and out of herself. The [color=dcf9af]park[/color], that once made all of us forget, is now permanently engraved into our [pulse]memories[/pulse]."
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Press Any" type="RichTextLabel" parent="Control/MemoryUnlockScreen/MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_travt")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "PRESS THE [wave]ACTION [/wave]BUTTON TO CONTINUE"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardDescription" type="Label" parent="Control/MemoryUnlockScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Increases movement speed by 50%"
+label_settings = SubResource("LabelSettings_aa6wj")
+horizontal_alignment = 1
+vertical_alignment = 1

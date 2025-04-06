@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0q60edoivvkh"]
+[gd_scene load_steps=17 format=3 uid="uid://c0q60edoivvkh"]
 
 [ext_resource type="Script" uid="uid://bkwba7cuskf6m" path="res://scripts/objects/crystal/crystal_manager.gd" id="1_choun"]
 [ext_resource type="Script" uid="uid://dicsbgf7qvcmj" path="res://scripts/objects/crystal/crystal_loader.gd" id="2_ya4ey"]
@@ -12,6 +12,26 @@
 [ext_resource type="PackedScene" uid="uid://cqnwl17cwypai" path="res://scenes/ui/main_ui.tscn" id="10_0ld40"]
 [ext_resource type="Script" uid="uid://b3dcw3qr4tt08" path="res://scripts/core/set_music.gd" id="11_eb6dy"]
 [ext_resource type="AudioStream" uid="uid://b3ofldrleh1k4" path="res://sound/songs/game_song_1.ogg" id="12_trceg"]
+
+[sub_resource type="Curve" id="Curve_eb6dy"]
+_data = [Vector2(0, 1), 0.0, -0.382022, 0, 0, Vector2(0.986928, 0.0224719), -2.31705, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_trceg"]
+curve = SubResource("Curve_eb6dy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a8y0u"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(320, 1, 1)
+initial_velocity_min = -20.0
+initial_velocity_max = 20.0
+angular_velocity_min = -118.36
+angular_velocity_max = 214.05
+gravity = Vector3(0, -200, 0)
+scale_min = 0.0
+scale_max = 5.0
+alpha_curve = SubResource("CurveTexture_trceg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jmfav"]
 shader = ExtResource("9_dp3eg")
@@ -43,10 +63,11 @@ metadata/_custom_type_script = "uid://bkwba7cuskf6m"
 script = ExtResource("2_ya4ey")
 metadata/_custom_type_script = "uid://dicsbgf7qvcmj"
 
-[node name="RoomSpawner" type="Node" parent="Logic" node_paths=PackedStringArray("container", "crystal_loader")]
+[node name="RoomSpawner" type="Node" parent="Logic" node_paths=PackedStringArray("falling_particles", "container", "crystal_loader")]
 script = ExtResource("3_eb6dy")
+falling_particles = NodePath("../../Visuals/FallingParticles")
 container = NodePath("../../Visuals/RoomContainer")
-load_delay = 1.0
+load_delay = 2.5
 crystal_loader = NodePath("../CrystalLoader")
 presets = Dictionary[int, ExtResource("4_trceg")]({
 0: ExtResource("5_a8y0u"),
@@ -76,6 +97,12 @@ metadata/_custom_type_script = "uid://cehfa4wtgs3rj"
 
 [node name="Character" parent="Visuals" instance=ExtResource("8_muem4")]
 position = Vector2(320, 192)
+
+[node name="FallingParticles" type="GPUParticles2D" parent="Visuals"]
+position = Vector2(320, 352)
+amount = 64
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_a8y0u")
 
 [node name="PostProcessing" type="CanvasLayer" parent="."]
 
