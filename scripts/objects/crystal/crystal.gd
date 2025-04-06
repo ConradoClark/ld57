@@ -45,6 +45,7 @@ func trigger():
   CrystalEvents.on_crystal_matching.emit()
   shader_mat.set_shader_parameter(outline_thickness, 0.0)
   triggered = true
+  SoundManager.play_sound(SfxBank.SFX_CRYSTAL_TRIGGER, 1., 1.1)
   if tween: tween.kill()
   tween = create_tween()
   tween.set_parallel(true)

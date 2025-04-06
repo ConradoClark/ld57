@@ -60,6 +60,11 @@ func match_crystals(crystal: Crystal):
     crystal.matched = true
     total_matched+=2
     CrystalEvents.on_crystal_matched.emit(true, crystal)
+    if total_matched < total_crystals:
+      var sound_pitch = clamp(1. + (0.15*total_matched), 1., 2.)
+      SoundManager.play_sound(SfxBank.SFX_CRYSTAL_MATCH, sound_pitch, sound_pitch)
+    else:
+      SoundManager.play_sound(SfxBank.SFX_CRYSTAL_FULL_MATCH, 1., 1.)
   matching_count = 0
   triggered_count = 0
   if not crystal.matched:

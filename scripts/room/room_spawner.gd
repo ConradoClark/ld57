@@ -28,6 +28,7 @@ func _on_clear():
   timer.start()
   
 func load_level():
+  SfxBank.load_game_sfx()
   var difficulty = Globals.player.difficulty
   var files = presets[difficulty].files
   var chosen = randi_range(0, len(files)-1)

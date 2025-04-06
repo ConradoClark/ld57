@@ -12,10 +12,15 @@ var music_pos: float
 func set_music(song: AudioStream):
   await get_tree().create_timer(0.5).timeout
   if not music.playing or music.stream != song:
-    music.volume_db = -40.
+    music.volume_db = -20.
     _fade_music_in()
     music.stream = song
     music.play()
+    
+func swap_music(song: AudioStream):
+  var current = music.get_playback_position()
+  music.stream = song
+  music.play(current)
     
 func pause_music():
   music_pos = music.get_playback_position()

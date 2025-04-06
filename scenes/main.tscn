@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0q60edoivvkh"]
+[gd_scene load_steps=14 format=3 uid="uid://c0q60edoivvkh"]
 
 [ext_resource type="Script" uid="uid://bkwba7cuskf6m" path="res://scripts/objects/crystal/crystal_manager.gd" id="1_choun"]
 [ext_resource type="Script" uid="uid://dicsbgf7qvcmj" path="res://scripts/objects/crystal/crystal_loader.gd" id="2_ya4ey"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://d2blx0egodcuv" path="res://scenes/character.tscn" id="8_muem4"]
 [ext_resource type="Shader" uid="uid://chqun1l6n18es" path="res://shaders/crt.gdshader" id="9_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://cqnwl17cwypai" path="res://scenes/ui/main_ui.tscn" id="10_0ld40"]
+[ext_resource type="Script" uid="uid://b3dcw3qr4tt08" path="res://scripts/core/set_music.gd" id="11_eb6dy"]
+[ext_resource type="AudioStream" uid="uid://b3ofldrleh1k4" path="res://sound/songs/game_song_1.ogg" id="12_trceg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jmfav"]
 shader = ExtResource("9_dp3eg")
@@ -86,3 +88,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainUi" parent="." instance=ExtResource("10_0ld40")]
+
+[node name="SetMusic" type="Node" parent="."]
+script = ExtResource("11_eb6dy")
+song = ExtResource("12_trceg")
+metadata/_custom_type_script = "uid://b3dcw3qr4tt08"

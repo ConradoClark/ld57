@@ -22,6 +22,8 @@ SoundManager="*res://scripts/core/sound_manager.gd"
 CrystalEvents="*res://scripts/objects/crystal/crystal_events.gd"
 PlayerEvents="*res://scripts/character/player_events.gd"
 RoomEvents="*res://scripts/room/room_events.gd"
+SfxBank="*res://scripts/core/sfx_bank.gd"
+MusicManager="*res://scripts/core/music_manager.gd"
 
 [display]
 
