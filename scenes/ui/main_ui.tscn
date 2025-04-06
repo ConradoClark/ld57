@@ -1,12 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqnwl17cwypai"]
+[gd_scene load_steps=12 format=3 uid="uid://cqnwl17cwypai"]
 
 [ext_resource type="Texture2D" uid="uid://b87urcpphwcau" path="res://sprites/ui/Brainpower_green.png" id="1_hnesk"]
+[ext_resource type="Shader" uid="uid://ck0yj8paggr3w" path="res://shaders/colorize.gdshader" id="1_yc0ux"]
 [ext_resource type="Texture2D" uid="uid://dlw7hhcvs43g3" path="res://sprites/ui/brainpower_fill.png" id="2_l8t6x"]
 [ext_resource type="Script" uid="uid://tcqop0px010w" path="res://scripts/ui/brain_meter.gd" id="3_travt"]
 [ext_resource type="Texture2D" uid="uid://bxdimy57omo4o" path="res://sprites/ui/Brainpower_yellow.png" id="4_b1beo"]
 [ext_resource type="FontFile" uid="uid://dijpwwxrvqrda" path="res://fonts/NotJamMonoClean11_SmallCaps.ttf" id="4_travt"]
 [ext_resource type="Texture2D" uid="uid://moup6kofto2m" path="res://sprites/ui/Brainpower_red.png" id="5_t0li6"]
+[ext_resource type="Texture2D" uid="uid://bk85ylhhqci7l" path="res://sprites/ui/memory_purple.png" id="7_oxwcw"]
 [ext_resource type="Script" uid="uid://uyfdy0m0l2wy" path="res://scripts/ui/ui_container.gd" id="7_t0li6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b65ll"]
+shader = ExtResource("1_yc0ux")
+shader_parameter/color = Color(0.988235, 0.988235, 0.988235, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yc0ux"]
+shader = ExtResource("1_yc0ux")
+shader_parameter/color = Color(0.988235, 0.988235, 0.988235, 0)
 
 [node name="MainUi" type="CanvasLayer"]
 
@@ -37,6 +47,7 @@ theme_override_constants/margin_left = 128
 theme_override_constants/margin_right = 128
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Control/MarginContainer/VBoxContainer/MarginContainer"]
+material = SubResource("ShaderMaterial_b65ll")
 layout_mode = 2
 texture = ExtResource("1_hnesk")
 patch_margin_left = 5
@@ -47,6 +58,7 @@ patch_margin_bottom = 7
 [node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/MarginContainer/NinePatchRect"]
 modulate = Color(0.690196, 0.815686, 0.494118, 1)
 show_behind_parent = true
+material = SubResource("ShaderMaterial_yc0ux")
 custom_minimum_size = Vector2(0, 19)
 layout_mode = 2
 offset_left = 4.0
@@ -95,6 +107,77 @@ layout_mode = 0
 offset_left = 278.0
 offset_top = 12.0
 offset_right = 360.0
+offset_bottom = 18.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_constants/margin_left = 650
+theme_override_constants/margin_right = 128
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture = ExtResource("7_oxwcw")
+patch_margin_left = 5
+patch_margin_top = 6
+patch_margin_right = 5
+patch_margin_bottom = 7
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer/NinePatchRect"]
+modulate = Color(0.768627, 0.780392, 0.933333, 1)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 19)
+layout_mode = 2
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 95.0
+offset_bottom = 25.0
+texture = ExtResource("2_l8t6x")
+stretch_mode = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 525
+theme_override_constants/margin_top = -21
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.105882, 0.113725, 0.203922, 1)
+theme_override_colors/font_shadow_color = Color(0.988235, 0.988235, 0.988235, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/normal_font = ExtResource("4_travt")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "UNLOCK MEMORY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="Control/MarginContainer2/HBoxContainer/VBoxContainer/MarginContainer2/RichTextLabel"]
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 0
+offset_left = 127.0
+offset_top = 12.0
+offset_right = 228.0
 offset_bottom = 18.0
 
 [node name="UIContainer" type="Control" parent="Control"]

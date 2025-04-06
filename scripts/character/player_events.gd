@@ -2,3 +2,4 @@ extends Node
 
 signal on_player_interact
 signal on_player_end_interaction
+signal on_brainpower_pellet_recover

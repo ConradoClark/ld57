@@ -1,0 +1,134 @@
+[gd_scene load_steps=20 format=3 uid="uid://ddvp3i7b6uvi3"]
+
+[ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_rl3ry"]
+[ext_resource type="Texture2D" uid="uid://fxlpwqudrk6w" path="res://sprites/effects/brainpower_pellet_spritesheet_41x40.png" id="2_rcwhd"]
+[ext_resource type="Script" uid="uid://diw2x3esb0jem" path="res://scripts/objects/brainpower/brainpower_pellet.gd" id="3_nawen"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0jw5"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(0, 0, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h5ut"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(41, 0, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otc3s"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(82, 0, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b23n"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(123, 0, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dw5k"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(164, 0, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p7sy"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(0, 40, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_helga"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(41, 40, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v037g"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(82, 40, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfj1w"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(123, 40, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cnvo"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(164, 40, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84uex"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(0, 80, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88bqs"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(41, 80, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue4ap"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(82, 80, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4hp4"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(123, 80, 41, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gwiw"]
+atlas = ExtResource("2_rcwhd")
+region = Rect2(164, 80, 41, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jatsk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0jw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7h5ut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otc3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b23n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dw5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p7sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_helga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v037g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfj1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cnvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84uex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88bqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue4ap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4hp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gwiw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 40.0
+}]
+
+[node name="BrainpowerPellet" type="Node2D"]
+z_index = 5
+script = ExtResource("1_rl3ry")
+metadata/_custom_type_script = "uid://602p1o26m2d6"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jatsk")
+autoplay = "default"
+frame_progress = 0.516653
+
+[node name="BrainpowerPellet" type="Node" parent="." node_paths=PackedStringArray("reference", "sprite")]
+script = ExtResource("3_nawen")
+reference = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://diw2x3esb0jem"

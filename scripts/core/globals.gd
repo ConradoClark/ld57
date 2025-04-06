@@ -8,6 +8,7 @@ class Constants:
     const CharacterController = "character_controller"
     const Room = "room"
     const Crystal = "crystal"
+    const BrainpowerPellet = "brainpower_pellet"
     
 var player: Player
 var object_container: ObjectContainer

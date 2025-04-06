@@ -59,11 +59,12 @@ func match_crystals(crystal: Crystal):
     matched_crystal.matched = true
     crystal.matched = true
     total_matched+=2
-    FloatingText.show_text("MATCH!", crystal.active_sprite.global_position, 1.)
+    CrystalEvents.on_crystal_matched.emit(true, crystal)
   matching_count = 0
   triggered_count = 0
   if not crystal.matched:
     await get_tree().create_timer(0.5).timeout
+    CrystalEvents.on_crystal_matched.emit(false, crystal)
     triggered_crystal.blackout()
     crystal.blackout()
   if total_matched >= total_crystals:
