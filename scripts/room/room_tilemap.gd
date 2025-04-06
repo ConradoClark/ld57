@@ -9,7 +9,10 @@ var min: Vector2
 var max: Vector2
 var size: Vector2
 
+var actor: Actor
+
 func _ready() -> void:
+  actor = Globals.get_actor(self)
   spawn.call_deferred()
   used_cells = get_used_cells()
   for cell in used_cells:
@@ -18,6 +21,7 @@ func _ready() -> void:
     if cell.y < min.y: min.y = cell.y
     if cell.y > max.y: max.y = cell.y
   size = Vector2(max.x - min.x, max.y - min.y)
+  RoomEvents.on_room_cleared.connect(_despawn)
 
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
   return true
@@ -39,3 +43,14 @@ func spawn():
 func _update_spawn(value: float):
   spawn_time = value
   notify_runtime_tile_data_update()
+
+func _despawn():
+  tween = create_tween()
+  tween.tween_method(_update_spawn, 1., 0., 1.)\
+    .set_ease(Tween.EASE_IN)\
+    .set_trans(Tween.TRANS_BOUNCE)
+  await tween.finished
+  spawn_time = -10
+  notify_runtime_tile_data_update()
+  await get_tree().process_frame
+  actor.queue_free()

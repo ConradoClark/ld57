@@ -1,14 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://c42b8ofmsoyg1"]
+[gd_scene load_steps=11 format=3 uid="uid://c42b8ofmsoyg1"]
 
 [ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_ldj1t"]
 [ext_resource type="Script" uid="uid://c3vtu5ujlsg2m" path="res://scripts/objects/crystal/crystal.gd" id="2_8e50l"]
-[ext_resource type="Texture2D" uid="uid://b2yd33fcq2prm" path="res://sprites/crystal/crystal_sketch.png" id="2_poage"]
+[ext_resource type="Texture2D" uid="uid://b2yd33fcq2prm" path="res://sprites/crystal/crystal_blue.png" id="2_poage"]
 [ext_resource type="Script" uid="uid://b5y7a2vbbnc5i" path="res://scripts/objects/object_spawner.gd" id="3_es1yo"]
 [ext_resource type="Texture2D" uid="uid://ck7n3t4ew3car" path="res://sprites/shadow.png" id="3_poage"]
+[ext_resource type="Shader" uid="uid://dmwc37wcx2fek" path="res://shaders/crystal.gdshader" id="4_e1ayj"]
 [ext_resource type="Texture2D" uid="uid://c86cjmh4yetsj" path="res://sprites/crystal/crystal_desaturated.png" id="4_yeg1p"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ovsw"]
+shader = ExtResource("4_e1ayj")
+shader_parameter/clr = Color(0.988235, 0.988235, 0.988235, 1)
+shader_parameter/clr2 = Color(0.105882, 0.113725, 0.203922, 1)
+shader_parameter/type = 1
+shader_parameter/thickness = 0.0
+shader_parameter/frequency = 7.0
+shader_parameter/phase_speed = 15.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_yeg1p"]
-radius = 19.0
+radius = 26.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8e50l"]
 radius = 9.0
@@ -20,28 +30,33 @@ metadata/_custom_type_script = "uid://602p1o26m2d6"
 
 [node name="Crystal" type="Node" parent="." node_paths=PackedStringArray("active_sprite", "inactive_sprite", "area")]
 script = ExtResource("2_8e50l")
-active_sprite = NodePath("../Sprites/Sprite_Active")
-inactive_sprite = NodePath("../Sprites/Sprite_Inactive")
+active_sprite = NodePath("../SpriteGroup/Sprites/Sprite_Active")
+inactive_sprite = NodePath("../SpriteGroup/Sprites/Sprite_Inactive")
 match_key = "blue"
 area = NodePath("../Area2D")
 metadata/_custom_type_script = "uid://c3vtu5ujlsg2m"
 
-[node name="ObjectSpawner" type="Node" parent="." node_paths=PackedStringArray("sprite_group", "sprite", "hide_sprite", "shadow")]
+[node name="ObjectSpawner" type="Node" parent="." node_paths=PackedStringArray("reference", "sprite_group", "sprite", "hide_sprite", "shadow")]
 script = ExtResource("3_es1yo")
-sprite_group = NodePath("..")
-sprite = NodePath("../Sprites")
-hide_sprite = NodePath("../Sprites/Sprite_Active")
+reference = NodePath("..")
+sprite_group = NodePath("../SpriteGroup")
+sprite = NodePath("../SpriteGroup/Sprites")
+hide_sprite = NodePath("../SpriteGroup/Sprites/Sprite_Active")
 shadow = NodePath("../Shadow")
 initial_y_offset = -50.0
 metadata/_custom_type_script = "uid://b5y7a2vbbnc5i"
 
-[node name="Sprites" type="Node2D" parent="."]
-
-[node name="Sprite_Active" type="Sprite2D" parent="Sprites"]
+[node name="SpriteGroup" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Sprites" type="Node2D" parent="SpriteGroup"]
+
+[node name="Sprite_Active" type="Sprite2D" parent="SpriteGroup/Sprites"]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_3ovsw")
 texture = ExtResource("2_poage")
 
-[node name="Sprite_Inactive" type="Sprite2D" parent="Sprites"]
+[node name="Sprite_Inactive" type="Sprite2D" parent="SpriteGroup/Sprites"]
 modulate = Color(1, 1, 1, 0)
 y_sort_enabled = true
 texture = ExtResource("4_yeg1p")

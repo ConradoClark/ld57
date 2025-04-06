@@ -4,6 +4,7 @@ class_name Room
 
 @export var ground_layer: TileMapLayer
 @export var wall_layer: TileMapLayer
+@export var definition: RoomDefinition
 
 var actor: Actor
 

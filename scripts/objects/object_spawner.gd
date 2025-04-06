@@ -2,6 +2,7 @@ extends Node
 
 class_name ObjectSpawner
 
+@export var reference: Node2D
 @export var sprite_group: Node2D
 @export var sprite: Node2D
 @export var hide_sprite: Node2D
@@ -16,9 +17,13 @@ func _ready():
   default_shadow_offset = shadow.position.y
   spawn.call_deferred()
   RoomEvents.on_room_loaded.connect(_on_room_loaded)
+  RoomEvents.on_room_cleared.connect(_on_room_cleared)
   
 func _on_room_loaded(_room: Room):
   finish()
+  
+func _on_room_cleared():
+  despawn()
 
 func spawn():
   shadow.visible = false
@@ -33,9 +38,6 @@ func finish():
   if tween: tween.kill()
   tween = create_tween()
   tween.set_parallel(true)
-  tween.tween_property(sprite_group, "position:y", 0., 1.)\
-    .set_ease(Tween.EASE_IN)\
-    .set_trans(Tween.TRANS_QUAD)
   tween.tween_property(sprite, "modulate", Color.WHITE, 1.)\
     .set_ease(Tween.EASE_IN)\
     .set_trans(Tween.TRANS_QUAD)
@@ -47,3 +49,22 @@ func finish():
     .set_trans(Tween.TRANS_QUAD)
   await tween.finished
   hide_sprite.visible = true
+
+func despawn():
+  shadow.scale = Vector2.ONE
+  if tween: tween.kill()
+  tween = create_tween()
+  tween.set_parallel(true)
+  tween.tween_property(sprite, "modulate", Color.TRANSPARENT, 1.)\
+    .set_ease(Tween.EASE_IN)\
+    .set_trans(Tween.TRANS_QUAD)
+  tween.tween_property(sprite, "position:y", initial_y_offset, 1.)\
+    .set_ease(Tween.EASE_IN)\
+    .set_trans(Tween.TRANS_BOUNCE)
+  tween.tween_property(shadow, "scale", Vector2(.1, .1), 1.)\
+    .set_ease(Tween.EASE_IN)\
+    .set_trans(Tween.TRANS_QUAD)
+  await tween.finished
+  shadow.visible = false
+  hide_sprite.visible = false
+  reference.queue_free()

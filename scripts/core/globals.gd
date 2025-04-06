@@ -5,7 +5,13 @@ class Constants:
     const Size = Vector2(640,360)
   class ActorParams:
     const Player = "player"
+    const CharacterController = "character_controller"
     const Room = "room"
+    const Crystal = "crystal"
+    
+var player: Player
+var object_container: ObjectContainer
+var ui_container: UIContainer
 
 func get_actor(node: Node) -> Actor:
   if node is Actor: return node as Actor

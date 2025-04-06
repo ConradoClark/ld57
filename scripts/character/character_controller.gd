@@ -14,6 +14,7 @@ var player: Player:
 
 func _ready():
   actor = Globals.get_actor(self)
+  actor.set_param(Globals.Constants.ActorParams.CharacterController, self)
   input_blocker = Blocker.new()
   add_child(input_blocker)
   
@@ -23,7 +24,9 @@ func _physics_process(delta):
   _move()
   
 func _capture_input():
-  if input_blocker.is_blocked(): return
+  if input_blocker.is_blocked(): 
+    desired_velocity["movement"] = Vector2.ZERO
+    return
   var input = Input.get_vector("left", "right", "up", "down")
   var target = input * player.speed
   movement_velocity = lerp(movement_velocity, target, 0.2)

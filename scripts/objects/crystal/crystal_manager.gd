@@ -6,12 +6,19 @@ var crystals: Dictionary[int, Crystal]
 var matching_count = 0
 var triggered_count = 0
 var in_range_crystal: Crystal
+var total_crystals = 0
+var total_matched = 0
 
 func _ready():
   CrystalEvents.on_crystal_added.connect(add_crystal)
   CrystalEvents.on_crystal_in_range.connect(_crystal_in_range)
   CrystalEvents.on_crystal_out_of_range.connect(_crystal_out_of_range)
   PlayerEvents.on_player_interact.connect(_on_player_interact)
+  CrystalEvents.on_crystals_placed.connect(_on_crystals_placed)
+  
+func _on_crystals_placed(total: int):
+  total_crystals = total
+  total_matched = 0
   
 func _on_player_interact():
   if not in_range_crystal: return
@@ -33,7 +40,7 @@ func trigger(crystal: Crystal):
   if crystal.triggered: return
   if matching_count >= 2: return
   matching_count += 1
-  await crystal.trigger()
+  crystal.trigger()
   triggered_count += 1
   match_crystals(crystal)
   
@@ -51,8 +58,17 @@ func match_crystals(crystal: Crystal):
     if matched_crystal.match_key != match_key: continue
     matched_crystal.matched = true
     crystal.matched = true
+    total_matched+=2
+    FloatingText.show_text("MATCH!", crystal.active_sprite.global_position, 1.)
   matching_count = 0
   triggered_count = 0
   if not crystal.matched:
+    await get_tree().create_timer(0.5).timeout
     triggered_crystal.blackout()
     crystal.blackout()
+  if total_matched >= total_crystals:
+    await get_tree().create_timer(0.5).timeout
+    print('cleared!')
+    clear()
+    RoomEvents.on_room_cleared.emit()
+    pass

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://572ryitg5ay4"]
+
+[ext_resource type="Script" uid="uid://7kjfi46utqkr" path="res://scripts/objects/crystal/crystal_marker.gd" id="1_w2640"]
+[ext_resource type="Script" uid="uid://chpeyf3xwo87a" path="res://scripts/effects/hide_on_ready.gd" id="2_2l1wh"]
+[ext_resource type="Texture2D" uid="uid://ju8f4tssuxw5" path="res://sprites/ui/debug_icons/crystal_marker.png" id="2_na04i"]
+
+[node name="CrystalMarker" type="Node2D"]
+script = ExtResource("1_w2640")
+metadata/_custom_type_script = "uid://7kjfi46utqkr"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_na04i")
+
+[node name="HideOnReady" type="Node" parent="." node_paths=PackedStringArray("reference")]
+script = ExtResource("2_2l1wh")
+reference = NodePath("..")
+metadata/_custom_type_script = "uid://chpeyf3xwo87a"

@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://c0q60edoivvkh"]
+
+[ext_resource type="Script" uid="uid://bkwba7cuskf6m" path="res://scripts/objects/crystal/crystal_manager.gd" id="1_choun"]
+[ext_resource type="Script" uid="uid://dicsbgf7qvcmj" path="res://scripts/objects/crystal/crystal_loader.gd" id="2_ya4ey"]
+[ext_resource type="Script" uid="uid://c6orute4ufg47" path="res://scripts/room/room_spawner.gd" id="3_eb6dy"]
+[ext_resource type="Script" uid="uid://dyufqd6n5frbh" path="res://scripts/room/room_preset.gd" id="4_trceg"]
+[ext_resource type="Resource" uid="uid://c4bwikypa0rb2" path="res://data/beginning.tres" id="5_a8y0u"]
+[ext_resource type="Resource" uid="uid://s683jdnqo5nd" path="res://data/first_levels.tres" id="6_jkv2x"]
+[ext_resource type="Script" uid="uid://cehfa4wtgs3rj" path="res://scripts/core/object_container.gd" id="7_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://d2blx0egodcuv" path="res://scenes/character.tscn" id="8_muem4"]
+[ext_resource type="Shader" uid="uid://chqun1l6n18es" path="res://shaders/crt.gdshader" id="9_dp3eg"]
+[ext_resource type="PackedScene" uid="uid://cqnwl17cwypai" path="res://scenes/ui/main_ui.tscn" id="10_0ld40"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmfav"]
+shader = ExtResource("9_dp3eg")
+shader_parameter/resolution = Vector2(640, 360)
+shader_parameter/scan_line_amount = 1.0
+shader_parameter/warp_amount = 1.0
+shader_parameter/noise_amount = 0.0
+shader_parameter/interference_amount = 0.5
+shader_parameter/grille_amount = 0.1
+shader_parameter/grille_size = 1.0
+shader_parameter/vignette_amount = 1.348
+shader_parameter/vignette_intensity = 0.445
+shader_parameter/aberation_amount = 0.5
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 1.0
+shader_parameter/scan_line_strength = -8.0
+shader_parameter/pixel_strength = -2.0
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Logic" type="Node" parent="."]
+
+[node name="CrystalManager" type="Node" parent="Logic"]
+script = ExtResource("1_choun")
+metadata/_custom_type_script = "uid://bkwba7cuskf6m"
+
+[node name="CrystalLoader" type="Node" parent="Logic"]
+script = ExtResource("2_ya4ey")
+metadata/_custom_type_script = "uid://dicsbgf7qvcmj"
+
+[node name="RoomSpawner" type="Node" parent="Logic" node_paths=PackedStringArray("container", "crystal_loader")]
+script = ExtResource("3_eb6dy")
+container = NodePath("../../Visuals/RoomContainer")
+load_delay = 1.0
+crystal_loader = NodePath("../CrystalLoader")
+presets = Dictionary[int, ExtResource("4_trceg")]({
+0: ExtResource("5_a8y0u"),
+1: ExtResource("6_jkv2x")
+})
+metadata/_custom_type_script = "uid://c6orute4ufg47"
+
+[node name="Visuals" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="TempBG" type="ColorRect" parent="Visuals"]
+z_index = -10
+custom_minimum_size = Vector2(640, 360)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.162066, 0.162066, 0.162066, 1)
+
+[node name="RoomContainer" type="Node2D" parent="Visuals"]
+y_sort_enabled = true
+script = ExtResource("7_jbj1t")
+metadata/_custom_type_script = "uid://cehfa4wtgs3rj"
+
+[node name="Character" parent="Visuals" instance=ExtResource("8_muem4")]
+position = Vector2(320, 192)
+
+[node name="PostProcessing" type="CanvasLayer" parent="."]
+
+[node name="CRT" type="ColorRect" parent="PostProcessing"]
+material = SubResource("ShaderMaterial_jmfav")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainUi" parent="." instance=ExtResource("10_0ld40")]

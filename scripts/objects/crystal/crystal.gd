@@ -11,10 +11,17 @@ var tween: Tween
 var in_range: bool
 var triggered: bool
 var matched: bool
+var actor: Actor
+var shader_mat: ShaderMaterial
+const outline_thickness = "thickness"
 
 func _ready():
+  actor = Globals.get_actor(self)
+  actor.set_param(Globals.Constants.ActorParams.Crystal, self)
   inactive_sprite.modulate = Color.WHITE
   active_sprite.modulate = Color.WHITE
+  shader_mat = active_sprite.material.duplicate() as ShaderMaterial
+  active_sprite.material = shader_mat
   area.body_entered.connect(_body_entered)
   area.body_exited.connect(_body_exited)
   _setup.call_deferred()
@@ -25,15 +32,18 @@ func _setup():
 func _body_entered(_body: Node2D):
   if matched or triggered: return
   in_range = true
+  shader_mat.set_shader_parameter(outline_thickness, 3.0)
   CrystalEvents.on_crystal_in_range.emit(self)
   
 func _body_exited(_body: Node2D):
-  if matched or triggered: return
+  if matched: return
   in_range = false  
+  shader_mat.set_shader_parameter(outline_thickness, 0.0)
   CrystalEvents.on_crystal_out_of_range.emit()
 
 func trigger():
   CrystalEvents.on_crystal_matching.emit()
+  shader_mat.set_shader_parameter(outline_thickness, 0.0)
   triggered = true
   if tween: tween.kill()
   tween = create_tween()

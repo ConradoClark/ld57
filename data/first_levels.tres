@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RoomPreset" load_steps=2 format=3 uid="uid://s683jdnqo5nd"]
+
+[ext_resource type="Script" uid="uid://dyufqd6n5frbh" path="res://scripts/room/room_preset.gd" id="1_2yluk"]
+
+[resource]
+script = ExtResource("1_2yluk")
+difficulty = 1
+files = Array[String](["uid://cmvvh1xtwjybv"])
+metadata/_custom_type_script = "uid://dyufqd6n5frbh"

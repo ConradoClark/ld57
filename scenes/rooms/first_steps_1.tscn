@@ -1,48 +1,54 @@
-[gd_scene load_steps=8 format=4 uid="uid://ri6eoiongwis"]
+[gd_scene load_steps=8 format=4 uid="uid://cmvvh1xtwjybv"]
 
-[ext_resource type="TileSet" uid="uid://dggmavmcihxbr" path="res://tilesets/empty_house.tres" id="1_7om2x"]
-[ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_8wg85"]
-[ext_resource type="Script" uid="uid://du1n0sjbae48l" path="res://scripts/room/room.gd" id="2_m7wsy"]
-[ext_resource type="Script" uid="uid://dojj0bcd1lp0h" path="res://scripts/room/room_tilemap.gd" id="2_qmp4u"]
-[ext_resource type="PackedScene" uid="uid://572ryitg5ay4" path="res://scenes/objects/crystal_marker.tscn" id="5_eik0t"]
-[ext_resource type="Script" uid="uid://nity5xbleckq" path="res://scripts/room/room_definition.gd" id="5_xdtnt"]
+[ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_tih83"]
+[ext_resource type="TileSet" uid="uid://dggmavmcihxbr" path="res://tilesets/empty_house.tres" id="2_sck0a"]
+[ext_resource type="Script" uid="uid://dojj0bcd1lp0h" path="res://scripts/room/room_tilemap.gd" id="3_tqt1m"]
+[ext_resource type="Script" uid="uid://du1n0sjbae48l" path="res://scripts/room/room.gd" id="4_dolyp"]
+[ext_resource type="Script" uid="uid://nity5xbleckq" path="res://scripts/room/room_definition.gd" id="5_8a8fd"]
+[ext_resource type="PackedScene" uid="uid://572ryitg5ay4" path="res://scenes/objects/crystal_marker.tscn" id="6_4udbf"]
 
-[sub_resource type="Resource" id="Resource_u7y4n"]
-script = ExtResource("5_xdtnt")
-min_colors = 1
-max_colors = 1
+[sub_resource type="Resource" id="Resource_tih83"]
+script = ExtResource("5_8a8fd")
+min_colors = 2
+max_colors = 2
 metadata/_custom_type_script = "uid://nity5xbleckq"
 
-[node name="Beginning" type="Node2D"]
+[node name="FirstSteps_1" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_8wg85")
+script = ExtResource("1_tih83")
 metadata/_custom_type_script = "uid://602p1o26m2d6"
 
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = -2
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD7//7/AgAAAAAAAAD7////AgAAAAAAAAD7/wAAAgAAAAAAAAD7/wEAAgAAAAAAAAD7/wIAAgAAAAAAAAD8//7/AgAAAAAAAAD8////AgAAAAAAAAD8/wAAAgAAAAAAAAD8/wEAAgAAAAAAAAD8/wIAAgAAAAAAAAD9//7/AgAAAAAAAAD9////AgAAAAAAAAD9/wAAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wIAAgAAAAAAAAD+//7/AgAAAAAAAAD+////AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAAAAAD///7/AgAAAAAAAAD/////AgAAAAAAAAD//wAAAgAAAAAAAAD//wEAAgAAAAAAAAD//wIAAgAAAAAAAAAAAP7/AgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAIAAgAAAAAAAAABAP7/AgAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAAABAAEAAgAAAAAAAAABAAIAAgAAAAAAAAACAP7/AgAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAADAP7/AgAAAAAAAAADAP//AgAAAAAAAAADAAAAAgAAAAAAAAADAAEAAgAAAAAAAAADAAIAAgAAAAAAAAD7//3/AgAAAAAAAAD8//3/AgAAAAAAAAD9//3/AgAAAAAAAAD+//3/AgAAAAAAAAD///3/AgAAAAAAAAAAAP3/AgAAAAAAAAABAP3/AgAAAAAAAAACAP3/AgAAAAAAAAADAP3/AgAAAAAAAAAEAP3/AgAAAAAAAAAEAP7/AgAAAAAAAAAEAP//AgAAAAAAAAAEAAAAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAIAAgAAAAAAAAA=")
-tile_set = ExtResource("1_7om2x")
-script = ExtResource("2_qmp4u")
+tile_set = ExtResource("2_sck0a")
+script = ExtResource("3_tqt1m")
 metadata/_custom_type_script = "uid://dojj0bcd1lp0h"
 
 [node name="Walls" type="TileMapLayer" parent="."]
 z_index = -2
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAD6//3/AgABAAEAAQD6//7/AgABAAEAAQD6////AgABAAEAAQD6/wAAAgABAAEAAQD6/wEAAgABAAEAAQD6/wIAAgABAAEAAQD6/wMAAgAAAAEAAgD7//3/AgACAAAAAAD7//7/AgAEAAAAAAD7/wMAAgABAAEAAwD8//3/AgABAAAAAAD8/wMAAgABAAEAAwD9//3/AgABAAAAAAD9/wMAAgABAAEAAwD+//3/AgABAAAAAAD+/wMAAgABAAEAAwD///3/AgABAAAAAAD//wMAAgABAAEAAwAAAP3/AgABAAAAAAAAAAMAAgABAAEAAwABAP3/AgABAAAAAAABAAMAAgABAAEAAwACAP3/AgABAAAAAAACAAMAAgABAAEAAwADAP3/AgABAAAAAAADAAIAAgABAAAAAQADAAMAAgABAAEAAwAEAP3/AgACAAAAAQAEAP7/AgADAAAAAQAEAP//AgADAAAAAQAEAAAAAgADAAAAAQAEAAEAAgADAAAAAQAEAAIAAgACAAAAAwAEAAMAAgABAAEAAwD6//z/AgAAAAEAAAD7//z/AgABAAEAAAD7////AgAEAAAAAAD7/wAAAgAEAAAAAAD7/wEAAgAEAAAAAAD7/wIAAgACAAAAAgD8//z/AgABAAEAAAD8/wIAAgABAAAAAQD9//z/AgABAAEAAAD9/wIAAgABAAAAAQD+//z/AgABAAEAAAD+/wIAAgABAAAAAQD///z/AgABAAEAAAD//wIAAgABAAAAAQAAAPz/AgABAAEAAAAAAAIAAgABAAAAAQABAPz/AgABAAEAAAABAAIAAgABAAAAAQACAPz/AgABAAEAAAACAAIAAgABAAAAAQADAPz/AgABAAEAAAAEAPz/AgABAAEAAAAFAPz/AgAAAAEAAQAFAP3/AgABAAEAAgAFAP7/AgABAAEAAgAFAP//AgABAAEAAgAFAAAAAgABAAEAAgAFAAEAAgABAAEAAgAFAAIAAgABAAEAAgAFAAMAAgAAAAEAAwA=")
-tile_set = ExtResource("1_7om2x")
-script = ExtResource("2_qmp4u")
+tile_set = ExtResource("2_sck0a")
+script = ExtResource("3_tqt1m")
 metadata/_custom_type_script = "uid://dojj0bcd1lp0h"
 
 [node name="Room" type="Node" parent="." node_paths=PackedStringArray("ground_layer", "wall_layer")]
-script = ExtResource("2_m7wsy")
+script = ExtResource("4_dolyp")
 ground_layer = NodePath("../Ground")
 wall_layer = NodePath("../Walls")
-definition = SubResource("Resource_u7y4n")
+definition = SubResource("Resource_tih83")
 metadata/_custom_type_script = "uid://du1n0sjbae48l"
 
-[node name="CrystalMarker" parent="." instance=ExtResource("5_eik0t")]
-position = Vector2(-96, 0)
+[node name="CrystalMarker" parent="." instance=ExtResource("6_4udbf")]
+position = Vector2(-96, 64)
 
-[node name="CrystalMarker2" parent="." instance=ExtResource("5_eik0t")]
-position = Vector2(96, 0)
+[node name="CrystalMarker3" parent="." instance=ExtResource("6_4udbf")]
+position = Vector2(-96, -64)
+
+[node name="CrystalMarker4" parent="." instance=ExtResource("6_4udbf")]
+position = Vector2(96, -64)
+
+[node name="CrystalMarker2" parent="." instance=ExtResource("6_4udbf")]
+position = Vector2(96, 64)
