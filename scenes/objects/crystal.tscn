@@ -18,7 +18,7 @@ shader_parameter/frequency = 7.0
 shader_parameter/phase_speed = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yeg1p"]
-radius = 26.0
+radius = 30.0167
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8e50l"]
 radius = 9.0

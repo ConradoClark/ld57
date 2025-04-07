@@ -7,13 +7,13 @@
 [ext_resource type="Script" uid="uid://nity5xbleckq" path="res://scripts/room/room_definition.gd" id="5_4gtk1"]
 [ext_resource type="PackedScene" uid="uid://572ryitg5ay4" path="res://scenes/objects/crystal_marker.tscn" id="6_tbk2f"]
 
-[sub_resource type="Resource" id="Resource_ngkqy"]
+[sub_resource type="Resource" id="Resource_l3cch"]
 script = ExtResource("5_4gtk1")
-min_colors = 3
-max_colors = 3
+min_colors = 4
+max_colors = 4
 metadata/_custom_type_script = "uid://nity5xbleckq"
 
-[node name="ThreeColors_1" type="Node2D"]
+[node name="FourColors_1" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_l3cch")
 metadata/_custom_type_script = "uid://602p1o26m2d6"
@@ -40,7 +40,7 @@ metadata/_custom_type_script = "uid://dojj0bcd1lp0h"
 script = ExtResource("4_xxrf8")
 ground_layer = NodePath("../Ground")
 wall_layer = NodePath("../Walls")
-definition = SubResource("Resource_ngkqy")
+definition = SubResource("Resource_l3cch")
 metadata/_custom_type_script = "uid://du1n0sjbae48l"
 
 [node name="CrystalMarker" parent="." instance=ExtResource("6_tbk2f")]
@@ -60,3 +60,9 @@ position = Vector2(0, -64)
 
 [node name="CrystalMarker5" parent="." instance=ExtResource("6_tbk2f")]
 position = Vector2(0, 64)
+
+[node name="CrystalMarker7" parent="." instance=ExtResource("6_tbk2f")]
+position = Vector2(-96, 0)
+
+[node name="CrystalMarker8" parent="." instance=ExtResource("6_tbk2f")]
+position = Vector2(96, 0)

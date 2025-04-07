@@ -99,17 +99,18 @@ func _transfer_brainpellet():
   while brainpower > 0:
     await get_tree().process_frame
   brain_pellet_transfer.stop()
+  MusicManager.load_songs()
   SoundManager.stop_sound(sound)
   await get_tree().create_timer(1.).timeout
   recover_brain(max_brainpower)
   PlayerEvents.on_brainpower_transfer.emit()
-  if memory >= max_memory:
+  if is_equal_approx(memory, max_memory):
+    print("memory:" + str(memory))
     MusicManager.change_song(MusicManager.GAME_SONG_1)
     PlayerEvents.on_memory_unlock.emit()
     await PlayerEvents.on_memory_picked
-    pass
-    #upgrades
   else:
+    print("memory:" + str(memory))
     PlayerEvents.on_ready_to_next_level.emit()
   
 func _spawn_transfer_brain_pellet():

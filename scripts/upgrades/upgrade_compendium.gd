@@ -12,13 +12,16 @@ func load_upgrades():
   if loaded: return
   for file_name in DirAccess.get_files_at(actions_folder):
     if file_name.ends_with("uid"): continue
+    if file_name.ends_with("remap"): continue
     prefetched_upgrades[file_name] = load(actions_folder+file_name)
   for file_name in DirAccess.get_files_at(upgrades_folder):
     if file_name.ends_with("uid"): continue
+    if file_name.ends_with("remap"): continue
     prefetched_definitions[file_name] = load(upgrades_folder+file_name)
   loaded = true
   for key in prefetched_definitions:
     var definition = prefetched_definitions[key] as UpgradeDefinition
+    if not definition: continue
     if definition.is_evolution: continue
     if available_upgrades.has(definition.available_from_difficulty):
       available_upgrades[definition.available_from_difficulty].append(definition)

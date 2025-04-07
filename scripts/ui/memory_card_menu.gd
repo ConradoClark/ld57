@@ -30,6 +30,7 @@ func _on_selected(card: MemoryCard):
   card_description.text = card.definition.description
   
 func show_menu():
+  print("should show menu")
   screen.visible = true
   mem_unlocked.visible = true
   pick_memory.visible = true
@@ -52,6 +53,7 @@ func show_menu():
     var middle = (len(memories)/2)
     cards[middle].select()
   else:
+    print("going out")
     screen.visible = false
     PlayerEvents.on_ready_to_next_level.emit()
   

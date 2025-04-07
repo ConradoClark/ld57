@@ -29,6 +29,7 @@ func _ready():
   
 func _on_endless_mode():
   endless_mode = true
+  timer.start()
   load_level()
 
 func _on_game_over():

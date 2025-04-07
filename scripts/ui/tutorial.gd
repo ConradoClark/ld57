@@ -9,6 +9,10 @@ var wait_input: bool
 func _ready():
   Globals.player.controller.input_blocker.block("tutorial")
   screen.visible = true
+  wait.call_deferred()
+  
+func wait():
+  await get_tree().create_timer(1.).timeout
   wait_input = true
 
 func _process(delta):
