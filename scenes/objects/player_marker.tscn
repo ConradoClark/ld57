@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6n7udqn1502w"]
+
+[ext_resource type="Script" uid="uid://cu48ov7caeitt" path="res://scripts/objects/player_marker.gd" id="1_hv4op"]
+[ext_resource type="Texture2D" uid="uid://dfgxsb3nu0t2d" path="res://sprites/ui/debug_icons/player_marker.png" id="2_gpakh"]
+[ext_resource type="Script" uid="uid://chpeyf3xwo87a" path="res://scripts/effects/hide_on_ready.gd" id="3_b1v0i"]
+
+[node name="PlayerMarker" type="Node2D"]
+script = ExtResource("1_hv4op")
+metadata/_custom_type_script = "uid://cu48ov7caeitt"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gpakh")
+
+[node name="HideOnReady" type="Node" parent="." node_paths=PackedStringArray("reference")]
+script = ExtResource("3_b1v0i")
+reference = NodePath("..")
+metadata/_custom_type_script = "uid://chpeyf3xwo87a"

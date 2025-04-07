@@ -1,4 +1,4 @@
 extends UpgradeAction
 
 func run():
-  Globals.player.speed *= 1.1
+  Globals.player.speed += 50

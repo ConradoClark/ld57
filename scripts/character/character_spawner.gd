@@ -22,9 +22,10 @@ func _ready():
   controller.input_blocker.block("spawn")
   RoomEvents.on_room_cleared.connect(_on_room_cleared)
   RoomEvents.on_room_loaded.connect(_on_room_loaded)
+  PlayerEvents.on_game_over.connect(_on_room_cleared)
   
 func _on_room_loaded(room: Room):
-  finish()
+  finish(room)
   
 func _on_room_cleared():
   controller.input_blocker.block("spawn")
@@ -56,13 +57,17 @@ func keep_floating():
       .set_trans(Tween.TRANS_QUAD)
     await tween.finished
   
-func finish():
+func finish(room: Room):
   floating = false
   shadow.visible = true
   shadow.scale = Vector2(0.1,0.1)
   if tween: tween.kill()
   tween = create_tween()
   tween.set_parallel(true)
+  controller.block_collisions()
+  tween.tween_property(controller.body, "global_position", room.player_pos, 1.)\
+    .set_ease(Tween.EASE_OUT)\
+    .set_trans(Tween.TRANS_QUAD)
   tween.tween_property(sprite_group, "position:y", 0., 1.)\
     .set_ease(Tween.EASE_IN)\
     .set_trans(Tween.TRANS_QUAD)
@@ -73,4 +78,6 @@ func finish():
     .set_ease(Tween.EASE_IN)\
     .set_trans(Tween.TRANS_QUAD)
   await tween.finished
+  await get_tree().create_timer(0.2).timeout
   controller.input_blocker.unblock("spawn")
+  controller.unblock_collisions()

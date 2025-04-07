@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=3 format=3 uid="uid://ccpory6ewekga"]
+
+[ext_resource type="SpriteFrames" uid="uid://c6ogj2rjsb72h" path="res://data/sprite_frames/ice_cream_crave.tres" id="1_hkfpf"]
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="2_dbjam"]
+
+[resource]
+script = ExtResource("2_dbjam")
+title = "Ice Cream Crave II"
+thought = "Pistachio"
+description = "Even more brainpower recover when scoring"
+frames = ExtResource("1_hkfpf")
+available_from_difficulty = 0
+is_evolution = true
+action = "uid://bh0lqvodj30it"
+lore = "Everyone started eating that [wave]pistachio[/wave]. No one liked it before, and now everything is pistachio this, pistachio that. She hated it with her [color=ffbae1]entire being[/color]. [wave]\"This tone of green reminds me of broccoli\"[/wave]."
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

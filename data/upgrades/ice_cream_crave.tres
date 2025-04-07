@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=4 format=3 uid="uid://dx1xl2cxv4rjj"]
+
+[ext_resource type="SpriteFrames" uid="uid://c6ogj2rjsb72h" path="res://data/sprite_frames/ice_cream_crave.tres" id="1_ffhg6"]
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="1_nwekv"]
+[ext_resource type="Resource" uid="uid://ccpory6ewekga" path="res://data/upgrades/ice_cream_crave2.tres" id="3_kv4n4"]
+
+[resource]
+script = ExtResource("1_nwekv")
+title = "Ice Cream Crave"
+thought = "Cookies and Chocolate"
+description = "Increases brainpower recover when scoring"
+frames = ExtResource("1_ffhg6")
+available_from_difficulty = 0
+is_evolution = false
+upgrade_into = ExtResource("3_kv4n4")
+action = "uid://bh0lqvodj30it"
+lore = "She loved that [wave]music[/wave]. 2 ice cream cones, one on each hand. One cookies, one chocolate, all yummy. Every saturday, he would arrive with that loud song, the ballad of [pulse] flavor... I still buy them. [pulse]Every[/pulse] saturday."
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

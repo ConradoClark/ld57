@@ -19,9 +19,10 @@ script = ExtResource("2_my7n2")
 speed = 150.0
 metadata/_custom_type_script = "uid://do3e012uyo6ih"
 
-[node name="CharacterController" type="Node" parent="." node_paths=PackedStringArray("body")]
+[node name="CharacterController" type="Node" parent="." node_paths=PackedStringArray("body", "shape")]
 script = ExtResource("3_dp8ca")
 body = NodePath("../CharacterBody2D")
+shape = NodePath("../CharacterBody2D/CollisionShape2D")
 metadata/_custom_type_script = "uid://dqyoxg0v7cbt8"
 
 [node name="CharacterSpawner" type="Node" parent="." node_paths=PackedStringArray("controller", "sprite_group", "sprite", "shadow")]
@@ -44,7 +45,9 @@ y_sort_enabled = true
 
 [node name="Sprite" type="Sprite2D" parent="CharacterBody2D/Sprite"]
 y_sort_enabled = true
+position = Vector2(0, 10)
 texture = ExtResource("1_agfs1")
+offset = Vector2(0, -10)
 
 [node name="Shadow" type="Sprite2D" parent="CharacterBody2D/Sprite"]
 modulate = Color(1, 1, 1, 0.588235)

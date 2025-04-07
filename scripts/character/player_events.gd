@@ -6,4 +6,7 @@ signal on_brainpower_pellet_recover
 signal on_brainpower_transfer
 signal on_ready_to_next_level
 signal on_memory_unlock
-signal on_memory_picked
+signal on_memory_picked(upgrade: UpgradeDefinition)
+signal on_game_finished
+signal on_game_over
+signal on_tutorial_over

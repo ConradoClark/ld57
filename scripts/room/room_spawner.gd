@@ -12,6 +12,8 @@ var scene: PackedScene
 var timer: Timer
 var loaded: bool
 var first: bool = true
+var chosen: String
+var endless_mode = false
 
 func _ready():
   timer = Timer.new()
@@ -22,6 +24,15 @@ func _ready():
   add_child(timer)
   load_level.call_deferred()
   RoomEvents.on_room_cleared.connect(_on_clear)
+  PlayerEvents.on_game_over.connect(_on_game_over)
+  RoomEvents.on_endless_mode.connect(_on_endless_mode)
+  
+func _on_endless_mode():
+  endless_mode = true
+  load_level()
+
+func _on_game_over():
+  falling_particles.emitting = true
   
 func _on_clear():
   loaded = false
@@ -34,13 +45,30 @@ func load_level():
   if not first:
     await PlayerEvents.on_ready_to_next_level
   else:
+    await PlayerEvents.on_tutorial_over
     first = false
   SfxBank.load_game_sfx()
+  MusicManager.load_songs()
   UpgradeCompendium.load_upgrades()
   var difficulty = Globals.player.difficulty
-  var files = presets[difficulty].files
-  var chosen = randi_range(0, len(files)-1)
-  scene = await load(files[chosen])
+  if not presets.has(difficulty):
+    if not endless_mode:
+      PlayerEvents.on_game_finished.emit()
+      return
+  var files: Array[String] = []
+  if endless_mode:
+    var each = presets.values()
+    for arr in each:
+      files.append_array(arr)
+  else:
+    files = presets[difficulty].files.duplicate()
+  for i in len(files):
+    if files[i] == chosen:
+      files.remove_at(i)
+      break
+  var option = randi_range(0, len(files)-1)
+  chosen = files[option]
+  scene = await load(chosen)
   loaded = true
   
 func _on_timeout():

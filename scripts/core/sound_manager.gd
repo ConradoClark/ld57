@@ -18,6 +18,7 @@ func set_music(song: AudioStream):
     music.play()
     
 func swap_music(song: AudioStream):
+  if song == music.stream: return
   var current = music.get_playback_position()
   music.stream = song
   music.play(current)

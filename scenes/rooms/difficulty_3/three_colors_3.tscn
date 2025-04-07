@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=4 uid="uid://dgtl3yysopu5v"]
+
+[ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_opdou"]
+[ext_resource type="TileSet" uid="uid://dggmavmcihxbr" path="res://tilesets/empty_house.tres" id="2_c4c63"]
+[ext_resource type="Script" uid="uid://dojj0bcd1lp0h" path="res://scripts/room/room_tilemap.gd" id="3_yj8pf"]
+[ext_resource type="Script" uid="uid://du1n0sjbae48l" path="res://scripts/room/room.gd" id="4_21tqa"]
+[ext_resource type="Script" uid="uid://nity5xbleckq" path="res://scripts/room/room_definition.gd" id="5_unoqu"]
+[ext_resource type="PackedScene" uid="uid://572ryitg5ay4" path="res://scenes/objects/crystal_marker.tscn" id="6_mbuw3"]
+[ext_resource type="PackedScene" uid="uid://b6n7udqn1502w" path="res://scenes/objects/player_marker.tscn" id="7_c4c63"]
+
+[sub_resource type="Resource" id="Resource_ngkqy"]
+script = ExtResource("5_unoqu")
+min_colors = 3
+max_colors = 3
+metadata/_custom_type_script = "uid://nity5xbleckq"
+
+[node name="ThreeColors_3" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_opdou")
+metadata/_custom_type_script = "uid://602p1o26m2d6"
+
+[node name="Ground" type="TileMapLayer" parent="."]
+z_index = -2
+z_as_relative = false
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD7//7/AgAAAAAAAAD7////AgAAAAAAAAD7/wAAAgAAAAAAAAD7/wEAAgAAAAAAAAD7/wIAAgAAAAAAAAD8////AgAAAAAAAAD8/wAAAgAAAAAAAAD8/wEAAgAAAAAAAAD8/wIAAgAAAAAAAAD9////AgAAAAAAAAD9/wAAAgAAAAAAAAD9/wEAAgAAAAAAAAD9/wIAAgAAAAAAAAD+////AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD+/wIAAgAAAAAAAAD/////AgAAAAAAAAD//wAAAgAAAAAAAAD//wEAAgAAAAAAAAD//wIAAgAAAAAAAAAAAP//AgAAAAAAAAAAAAAAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAIAAgAAAAAAAAABAP//AgAAAAAAAAABAAAAAgAAAAAAAAABAAEAAgAAAAAAAAABAAIAAgAAAAAAAAACAP//AgAAAAAAAAACAAAAAgAAAAAAAAACAAEAAgAAAAAAAAACAAIAAgAAAAAAAAADAP//AgAAAAAAAAADAAAAAgAAAAAAAAADAAEAAgAAAAAAAAADAAIAAgAAAAAAAAAEAP7/AgAAAAAAAAAEAP//AgAAAAAAAAAEAAAAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAIAAgAAAAAAAAD6/wIAAgAAAAAAAAD5/wIAAgAAAAAAAAD5/wEAAgAAAAAAAAD5/wAAAgAAAAAAAAD5////AgAAAAAAAAD5//7/AgAAAAAAAAD6//7/AgAAAAAAAAD6////AgAAAAAAAAD6/wAAAgAAAAAAAAD6/wEAAgAAAAAAAAAGAAIAAgAAAAAAAAAGAAEAAgAAAAAAAAAGAAAAAgAAAAAAAAAGAP//AgAAAAAAAAAGAP7/AgAAAAAAAAAFAP7/AgAAAAAAAAAFAP//AgAAAAAAAAAFAAAAAgAAAAAAAAAFAAEAAgAAAAAAAAAFAAIAAgAAAAAAAAA=")
+tile_set = ExtResource("2_c4c63")
+script = ExtResource("3_yj8pf")
+metadata/_custom_type_script = "uid://dojj0bcd1lp0h"
+
+[node name="Walls" type="TileMapLayer" parent="."]
+z_index = -2
+z_as_relative = false
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD9/wMAAgABAAEAAwD+/wMAAgABAAEAAwD//wMAAgABAAEAAwAAAAMAAgABAAEAAwABAAMAAgABAAEAAwACAAMAAgABAAEAAwD9/wIAAgABAAAAAQD+/wIAAgABAAAAAQD//wIAAgABAAAAAQAAAAIAAgABAAAAAQABAAIAAgABAAAAAQACAAIAAgABAAAAAQD9////AgABAAEAAAD9/wAAAgABAAAAAAD+////AgABAAEAAAD+/wAAAgABAAAAAAD/////AgABAAEAAAD//wAAAgABAAAAAAAAAP//AgABAAEAAAAAAAAAAgABAAAAAAABAP//AgABAAEAAAABAAAAAgABAAAAAAACAP//AgABAAEAAAACAAAAAgABAAAAAAD6/wIAAgABAAAAAQD6/wMAAgABAAEAAwD4/wAAAgABAAEAAQD4/wEAAgABAAEAAQD4/wIAAgABAAEAAQD4/wMAAgAAAAEAAgD5/wEAAgAEAAAAAAD5/wIAAgACAAAAAgD5/wMAAgABAAEAAwAFAAIAAgABAAAAAQAFAAMAAgABAAEAAwAGAAEAAgADAAAAAQAGAAIAAgACAAAAAwAGAAMAAgABAAEAAwAHAAEAAgABAAEAAgAHAAIAAgABAAEAAgAHAAMAAgAAAAEAAwD4//3/AgAAAAEAAAD5//3/AgABAAEAAAD6//3/AgABAAEAAAAFAP3/AgABAAEAAAAFAP7/AgABAAAAAAAGAP3/AgABAAEAAAAGAP7/AgACAAAAAQAHAP3/AgAAAAEAAQAHAP7/AgABAAEAAgD5//7/AgACAAAAAAD6//7/AgABAAAAAAD5/wAAAgAEAAAAAAD4////AgABAAEAAQD5////AgAEAAAAAAD4//7/AgABAAEAAQAGAAAAAgADAAAAAQAHAAAAAgABAAEAAgAGAP//AgADAAAAAQAHAP//AgABAAEAAgADAAIAAgABAAAAAQADAAMAAgABAAEAAwAEAAIAAgABAAAAAQAEAAMAAgABAAEAAwD7/wIAAgABAAAAAQD7/wMAAgABAAEAAwD8/wIAAgABAAAAAQD8/wMAAgABAAEAAwAEAP3/AgABAAEAAAAEAP7/AgACAAAAAAADAP3/AgAAAAEAAAADAP7/AgABAAEAAQD7//3/AgABAAEAAAD7//7/AgACAAAAAQD8//3/AgAAAAEAAQD8//7/AgABAAEAAgD8////AgACAAEAAQADAP//AgACAAEAAAAEAP//AgADAAAAAAADAAAAAgABAAAAAAD8/wAAAgABAAAAAAD7////AgADAAAAAQA=")
+tile_set = ExtResource("2_c4c63")
+script = ExtResource("3_yj8pf")
+metadata/_custom_type_script = "uid://dojj0bcd1lp0h"
+
+[node name="Room" type="Node" parent="." node_paths=PackedStringArray("ground_layer", "wall_layer")]
+script = ExtResource("4_21tqa")
+ground_layer = NodePath("../Ground")
+wall_layer = NodePath("../Walls")
+definition = SubResource("Resource_ngkqy")
+metadata/_custom_type_script = "uid://du1n0sjbae48l"
+
+[node name="CrystalMarker" parent="." instance=ExtResource("6_mbuw3")]
+position = Vector2(-192, -32)
+
+[node name="CrystalMarker3" parent="." instance=ExtResource("6_mbuw3")]
+position = Vector2(-192, 64)
+
+[node name="CrystalMarker4" parent="." instance=ExtResource("6_mbuw3")]
+position = Vector2(192, -32)
+
+[node name="CrystalMarker2" parent="." instance=ExtResource("6_mbuw3")]
+position = Vector2(192, 64)
+
+[node name="CrystalMarker6" parent="." instance=ExtResource("6_mbuw3")]
+position = Vector2(-64, 32)
+
+[node name="CrystalMarker5" parent="." instance=ExtResource("6_mbuw3")]
+position = Vector2(64, 32)
+
+[node name="PlayerMarker" parent="." instance=ExtResource("7_c4c63")]
+position = Vector2(0, 64)

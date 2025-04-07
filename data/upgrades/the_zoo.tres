@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=4 format=3 uid="uid://ccuubkjys142e"]
+
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="1_cgqsb"]
+[ext_resource type="SpriteFrames" uid="uid://cap3dnh1yod1w" path="res://data/sprite_frames/thezoo.tres" id="1_yc0ul"]
+[ext_resource type="Resource" uid="uid://c87xqd6nwctrf" path="res://data/upgrades/the_zoo2.tres" id="3_pvh17"]
+
+[resource]
+script = ExtResource("1_cgqsb")
+title = "Elephant's Mind"
+thought = "I saw them on the zoo"
+description = "Excess brainpower gives more memory"
+frames = ExtResource("1_yc0ul")
+available_from_difficulty = 0
+is_evolution = false
+upgrade_into = ExtResource("3_pvh17")
+action = "uid://bwx85ymujkltd"
+lore = "She went to the [wave]zoo[/wave] a few times. The animals were happy, but restricted. The humans were also happy, but [pulse]restricted[/pulse]. What is this concept of [color=c4c7ee]freedom[/color] in a world where nothing is [pulse]truly free?[/pulse]"
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

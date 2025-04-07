@@ -27,8 +27,9 @@ func _on_player_interact():
 func _crystal_in_range(crystal: Crystal):
   in_range_crystal = crystal
   
-func _crystal_out_of_range():
-  in_range_crystal = null
+func _crystal_out_of_range(crystal: Crystal):
+  if in_range_crystal == crystal:
+    in_range_crystal = null
 
 func add_crystal(crystal: Crystal):
   crystals[crystal.get_instance_id()] = crystal
@@ -68,6 +69,7 @@ func match_crystals(crystal: Crystal):
   matching_count = 0
   triggered_count = 0
   if not crystal.matched:
+    SoundManager.play_sound(SfxBank.WRONG, 0.95, 1.04)
     await get_tree().create_timer(0.5).timeout
     CrystalEvents.on_crystal_matched.emit(false, crystal)
     triggered_crystal.blackout()

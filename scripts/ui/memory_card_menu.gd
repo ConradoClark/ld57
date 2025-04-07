@@ -69,7 +69,7 @@ func _add_memory_card(card: MemoryCard):
   cards.append(card)
   
 func _show_memory():
-  PlayerEvents.on_memory_picked.emit()
+  PlayerEvents.on_memory_picked.emit(selected_card.definition)
   memory_text.text = selected_card.definition.lore
   can_select = false
   memory_text.visible = true

@@ -9,17 +9,26 @@ const BRAINPOWER_PELLET_TRANSFER = preload("res://scenes/effects/brainpower_pell
 var actor: Actor
 var brainpower: float = 100.
 var max_brainpower: float = 100.
-var brainpower_decay: float = 2.
+var brainpower_decay: float = 3.
 var decaying = false
 
 var memory: float = 0.
 var max_memory: float = 200.
-var memory_thresholds = [200, 300, 400]
+var total_memory: float = 0.
+var memory_to_next_difficulty = [200, 300, 400]
+var next_memory_to_difficulty: float = memory_to_next_difficulty[0]
+var current_memory_threshold = 0
+var current_difficulty_threshold = 0
 
 var difficulty = 0
 var match_combo = 0
 var pellet_target: Vector2
 var brain_pellet_transfer: Timer
+
+var zen_factor:float = 1.
+var recover_factor: float = 1.
+var memory_conversion_factor: float = 1.
+var dead = false
 
 var controller: CharacterController:
   get: return actor.parameters[Globals.Constants.ActorParams.CharacterController] as CharacterController
@@ -32,9 +41,25 @@ func _ready():
   RoomEvents.on_room_loaded.connect(_room_loaded)
   CrystalEvents.on_crystal_matched.connect(_on_match)
   brain_pellet_transfer = Timer.new()
-  brain_pellet_transfer.wait_time = 0.1
+  brain_pellet_transfer.wait_time = 0.07
   brain_pellet_transfer.timeout.connect(_spawn_transfer_brain_pellet)
   add_child(brain_pellet_transfer)
+  PlayerEvents.on_memory_picked.connect(_on_memory_picked)
+  
+func _on_memory_picked(upgrade: UpgradeDefinition):
+  SoundManager.play_sound(SfxBank.ABILITY, 0.95, 1.04)
+  var script = UpgradeAction.new()
+  script.set_script(load(upgrade.action))
+  add_child(script)
+  script.run()
+  total_memory += max_memory
+  current_memory_threshold = clamp(current_memory_threshold+1, 0, len(memory_to_next_difficulty)-1)
+  max_memory = memory_to_next_difficulty[current_memory_threshold]
+  memory = 0
+  if total_memory > next_memory_to_difficulty:
+    difficulty+=1
+    current_difficulty_threshold = clamp(current_difficulty_threshold+1, 0, len(memory_to_next_difficulty)-1)
+    next_memory_to_difficulty = total_memory + memory_to_next_difficulty[current_difficulty_threshold]
   
 func _on_match(matched: bool, crystal: Crystal):
   if matched:
@@ -44,7 +69,7 @@ func _on_match(matched: bool, crystal: Crystal):
     else: 
       FloatingText.show_text("MATCH!", crystal.active_sprite.global_position, 1.)
     await _spawn_brainpellet(crystal.active_sprite.global_position)
-    recover_brain(5 * match_combo)
+    recover_brain(5 * match_combo * recover_factor)
   else:
     match_combo = 0
 
@@ -60,6 +85,7 @@ func _spawn_brainpellet(pos: Vector2):
   PlayerEvents.on_brainpower_pellet_recover.emit()
   
 func _room_cleared():
+  match_combo = 0
   decaying = false
   if difficulty == 0:
     difficulty = 1
@@ -78,6 +104,7 @@ func _transfer_brainpellet():
   recover_brain(max_brainpower)
   PlayerEvents.on_brainpower_transfer.emit()
   if memory >= max_memory:
+    MusicManager.change_song(MusicManager.GAME_SONG_1)
     PlayerEvents.on_memory_unlock.emit()
     await PlayerEvents.on_memory_picked
     pass
@@ -94,18 +121,32 @@ func _spawn_transfer_brain_pellet():
   if not script: return
   script.move()
   await script.pellet_done
-  recover_memory(5)
+  recover_memory(5*memory_conversion_factor)
 
 func _room_loaded(_room):
   decaying = true
   controller.input_blocker.unblock("room_event")
+  if difficulty < 2:
+    MusicManager.change_song(MusicManager.GAME_SONG_1)
+    brainpower_decay = 3
+  elif difficulty < 3:
+    MusicManager.change_song(MusicManager.GAME_SONG_2)
+    brainpower_decay = 3.5
+  else:
+    MusicManager.change_song(MusicManager.GAME_SONG_3)
+    brainpower_decay = 4.5
 
 func _process(delta):
+  if dead: return
   if Input.is_action_just_pressed("action"):
     PlayerEvents.on_player_interact.emit()
   if decaying:
-    brainpower = clamp(brainpower - delta * brainpower_decay, 0., max_brainpower)
-
+    var zen_multi = zen_factor if controller.movement_velocity.is_zero_approx() else 1.
+    brainpower = clamp(brainpower - delta * brainpower_decay * zen_multi, 0., max_brainpower)
+    if brainpower <=0:
+      dead = true
+      PlayerEvents.on_game_over.emit()
+      
 func recover_brain(amount: float):
   if brainpower <= 0 and decaying: return
   brainpower = clamp(brainpower + amount, 0., max_brainpower)

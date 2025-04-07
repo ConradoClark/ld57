@@ -25,6 +25,10 @@ func _ready():
   area.body_entered.connect(_body_entered)
   area.body_exited.connect(_body_exited)
   _setup.call_deferred()
+  PlayerEvents.on_game_over.connect(_on_game_over)
+  
+func _on_game_over():
+  actor.queue_free()
   
 func _setup():
   CrystalEvents.on_crystal_added.emit(self)
@@ -39,7 +43,7 @@ func _body_exited(_body: Node2D):
   if matched: return
   in_range = false  
   shader_mat.set_shader_parameter(outline_thickness, 0.0)
-  CrystalEvents.on_crystal_out_of_range.emit()
+  CrystalEvents.on_crystal_out_of_range.emit(self)
 
 func trigger():
   CrystalEvents.on_crystal_matching.emit()

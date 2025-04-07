@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UpgradeDefinition" load_steps=3 format=3 uid="uid://c87xqd6nwctrf"]
+
+[ext_resource type="SpriteFrames" uid="uid://cap3dnh1yod1w" path="res://data/sprite_frames/thezoo.tres" id="1_np7gw"]
+[ext_resource type="Script" uid="uid://u5h0ynva28ia" path="res://scripts/upgrades/upgrade_definition.gd" id="2_p76u6"]
+
+[resource]
+script = ExtResource("2_p76u6")
+title = "Elephant's Mind II"
+thought = "They got away!"
+description = "Excess brainpower gives more memory"
+frames = ExtResource("1_np7gw")
+available_from_difficulty = 0
+is_evolution = true
+action = "uid://bwx85ymujkltd"
+lore = "That last time at the [wave]zoo[/wave], the giraffe got away. The animal managed to get into the mall and enter a movie session. It became the sensation of the week. She wouldn't stop [pulse]laughing[/pulse]. "
+metadata/_custom_type_script = "uid://u5h0ynva28ia"

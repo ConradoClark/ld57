@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cqnwl17cwypai"]
+[gd_scene load_steps=19 format=3 uid="uid://cqnwl17cwypai"]
 
 [ext_resource type="Texture2D" uid="uid://b87urcpphwcau" path="res://sprites/ui/Brainpower_green.png" id="1_hnesk"]
 [ext_resource type="Shader" uid="uid://ck0yj8paggr3w" path="res://shaders/colorize.gdshader" id="1_yc0ux"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" uid="uid://dtpfbgynm4y1p" path="res://scripts/ui/memory_meter.gd" id="9_b65ll"]
 [ext_resource type="Script" uid="uid://c2vu6xojcjdeo" path="res://scripts/ui/memory_card_menu.gd" id="11_m82f4"]
 [ext_resource type="FontFile" uid="uid://crkboln74tr5e" path="res://fonts/Not Jam Giant UI 22.ttf" id="11_oi40j"]
+[ext_resource type="Script" uid="uid://cstcq44knk5h1" path="res://scripts/ui/win_screen.gd" id="13_m82f4"]
+[ext_resource type="Script" uid="uid://cn8y08psukxn0" path="res://scripts/ui/game_over.gd" id="14_8s2gp"]
+[ext_resource type="Script" uid="uid://ddj6aqsud52bk" path="res://scripts/ui/tutorial.gd" id="15_ampf0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b65ll"]
 shader = ExtResource("1_yc0ux")
@@ -290,7 +293,7 @@ alignment = 1
 [node name="MemoryText" type="RichTextLabel" parent="Control/MemoryUnlockScreen/MarginContainer/VBoxContainer"]
 visible = false
 clip_contents = false
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
 theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
@@ -334,3 +337,151 @@ text = "Increases movement speed by 50%"
 label_settings = SubResource("LabelSettings_aa6wj")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="WinScreen" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/WinScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MemoryText" type="RichTextLabel" parent="Control/WinScreen/CenterContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(500, 128)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_travt")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "Deep down in the corner of our memories, she stands.
+Hidden into my soul, inside my heart
+And within the void echo she left behind
+We were left empty, adrift, one world apart.
+
+[wave]THANK YOU FOR PLAYING[/wave]
+
+(press the action button to enter endless mode)
+"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinScreen" type="Node" parent="Control/WinScreen" node_paths=PackedStringArray("screen")]
+script = ExtResource("13_m82f4")
+screen = NodePath("..")
+metadata/_custom_type_script = "uid://cstcq44knk5h1"
+
+[node name="GameOver" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverText" type="RichTextLabel" parent="Control/GameOver/CenterContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(500, 128)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_travt")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "I tried so hard to remember
+But the memories of you are fading away
+I beg, please give me another chance
+Or we will all be left astray
+
+
+(press the action button to try again)
+"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOver" type="Node" parent="Control/GameOver" node_paths=PackedStringArray("screen")]
+script = ExtResource("14_8s2gp")
+screen = NodePath("..")
+metadata/_custom_type_script = "uid://cn8y08psukxn0"
+
+[node name="Tutorial" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/Tutorial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverText" type="RichTextLabel" parent="Control/Tutorial/CenterContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(500, 128)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0.337255, 0.831373, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/normal_font = ExtResource("4_travt")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "This is a game about memory
+The crystals will be discoloured 
+until you [wave]tap them[/wave] with the action button
+After tapping, tap a crystal of the same color
+
+it gives brainpower.
+
+Hope you like it. This was made for LD 57: Depths
+
+Press the action button to continue
+SPACE BAR or A on gamepad
+"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tutorial" type="Node" parent="Control/Tutorial" node_paths=PackedStringArray("screen")]
+script = ExtResource("15_ampf0")
+screen = NodePath("..")
+metadata/_custom_type_script = "uid://ddj6aqsud52bk"

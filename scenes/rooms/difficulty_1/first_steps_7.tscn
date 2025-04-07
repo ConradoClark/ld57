@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=4 uid="uid://cxgaoog07hhhw"]
+
+[ext_resource type="Script" uid="uid://602p1o26m2d6" path="res://scripts/core/actor.gd" id="1_mqoen"]
+[ext_resource type="TileSet" uid="uid://dggmavmcihxbr" path="res://tilesets/empty_house.tres" id="2_ob3sn"]
+[ext_resource type="Script" uid="uid://dojj0bcd1lp0h" path="res://scripts/room/room_tilemap.gd" id="3_rraxa"]
+[ext_resource type="Script" uid="uid://du1n0sjbae48l" path="res://scripts/room/room.gd" id="4_0vnjl"]
+[ext_resource type="Script" uid="uid://nity5xbleckq" path="res://scripts/room/room_definition.gd" id="5_c48vy"]
+[ext_resource type="PackedScene" uid="uid://572ryitg5ay4" path="res://scenes/objects/crystal_marker.tscn" id="6_kb1na"]
+[ext_resource type="PackedScene" uid="uid://b6n7udqn1502w" path="res://scenes/objects/player_marker.tscn" id="7_ky448"]
+
+[sub_resource type="Resource" id="Resource_tih83"]
+script = ExtResource("5_c48vy")
+min_colors = 2
+max_colors = 2
+metadata/_custom_type_script = "uid://nity5xbleckq"
+
+[node name="FirstSteps_7" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_mqoen")
+metadata/_custom_type_script = "uid://602p1o26m2d6"
+
+[node name="Ground" type="TileMapLayer" parent="."]
+z_index = -2
+z_as_relative = false
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD7//7/AgAAAAAAAAD7////AgAAAAAAAAD8//7/AgAAAAAAAAD8////AgAAAAAAAAD9//7/AgAAAAAAAAD9////AgAAAAAAAAD+//7/AgAAAAAAAAD+////AgAAAAAAAAD///7/AgAAAAAAAAD/////AgAAAAAAAAAAAP7/AgAAAAAAAAAAAP//AgAAAAAAAAABAP7/AgAAAAAAAAABAP//AgAAAAAAAAACAP7/AgAAAAAAAAACAP//AgAAAAAAAAADAP7/AgAAAAAAAAADAP//AgAAAAAAAAD7//3/AgAAAAAAAAD8//3/AgAAAAAAAAD9//3/AgAAAAAAAAD+//3/AgAAAAAAAAD///3/AgAAAAAAAAAAAP3/AgAAAAAAAAABAP3/AgAAAAAAAAACAP3/AgAAAAAAAAADAP3/AgAAAAAAAAAEAP3/AgAAAAAAAAAEAP7/AgAAAAAAAAAEAP//AgAAAAAAAAD+/wAAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAAgAAAAAAAAD//wAAAgAAAAAAAAD//wIAAgAAAAAAAAD+/wIAAgAAAAAAAAA=")
+tile_set = ExtResource("2_ob3sn")
+script = ExtResource("3_rraxa")
+metadata/_custom_type_script = "uid://dojj0bcd1lp0h"
+
+[node name="Walls" type="TileMapLayer" parent="."]
+z_index = -2
+z_as_relative = false
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD///3/AgABAAAAAAAAAP3/AgABAAAAAAABAP3/AgABAAAAAAD///z/AgABAAEAAAAAAPz/AgABAAEAAAABAPz/AgABAAEAAAD9//z/AgABAAEAAAD9//3/AgABAAAAAAD+//z/AgABAAEAAAD+//3/AgABAAAAAAACAPz/AgABAAEAAAACAP3/AgABAAAAAAADAPz/AgABAAEAAAADAP3/AgABAAAAAAAEAPz/AgABAAEAAAAEAP3/AgACAAAAAQAEAP7/AgADAAAAAQAEAP//AgACAAAAAwAFAPz/AgAAAAEAAQAFAP3/AgABAAEAAgAFAP7/AgABAAEAAgAFAP//AgABAAEAAgD6//z/AgAAAAEAAAD6//3/AgABAAEAAQD6//7/AgABAAEAAQD6////AgABAAEAAQD7//z/AgABAAEAAAD7//3/AgACAAAAAAD7//7/AgAEAAAAAAD7////AgACAAAAAgD8//z/AgABAAEAAAD8//3/AgABAAAAAAD6/wAAAgAAAAEAAgD7/wAAAgABAAEAAwAEAAAAAgABAAEAAwAFAAAAAgAAAAEAAwD8////AgABAAAAAQD8/wAAAgABAAEAAwD9////AgABAAAAAQD9/wAAAgACAAEAAgABAP//AgABAAAAAQABAAAAAgACAAEAAwACAP//AgABAAAAAQACAAAAAgABAAEAAwADAP//AgABAAAAAQADAAAAAgABAAEAAwD9/wEAAgABAAEAAQD9/wIAAgABAAEAAQD9/wMAAgAAAAEAAgABAAMAAgAAAAEAAwD+/wIAAgACAAAAAgD+/wMAAgABAAEAAwD//wIAAgABAAAAAQD//wMAAgABAAEAAwAAAAIAAgACAAAAAwAAAAMAAgABAAEAAwABAAIAAgABAAEAAgABAAEAAgABAAEAAgD+/wAAAgADAAAAAAD+/wEAAgADAAAAAAAAAAEAAgADAAAAAQAAAAAAAgADAAAAAQA=")
+tile_set = ExtResource("2_ob3sn")
+script = ExtResource("3_rraxa")
+metadata/_custom_type_script = "uid://dojj0bcd1lp0h"
+
+[node name="Room" type="Node" parent="." node_paths=PackedStringArray("ground_layer", "wall_layer")]
+script = ExtResource("4_0vnjl")
+ground_layer = NodePath("../Ground")
+wall_layer = NodePath("../Walls")
+definition = SubResource("Resource_tih83")
+metadata/_custom_type_script = "uid://du1n0sjbae48l"
+
+[node name="CrystalMarker" parent="." instance=ExtResource("6_kb1na")]
+position = Vector2(-128, -64)
+
+[node name="CrystalMarker3" parent="." instance=ExtResource("6_kb1na")]
+position = Vector2(-64, -32)
+
+[node name="CrystalMarker4" parent="." instance=ExtResource("6_kb1na")]
+position = Vector2(128, -32)
+
+[node name="CrystalMarker2" parent="." instance=ExtResource("6_kb1na")]
+position = Vector2(-32, 64)
+
+[node name="PlayerMarker" parent="." instance=ExtResource("7_ky448")]
+position = Vector2(64, -64)

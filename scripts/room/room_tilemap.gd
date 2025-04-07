@@ -22,6 +22,7 @@ func _ready() -> void:
     if cell.y > max.y: max.y = cell.y
   size = Vector2(max.x - min.x, max.y - min.y)
   RoomEvents.on_room_cleared.connect(_despawn)
+  PlayerEvents.on_game_over.connect(_despawn)
 
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
   return true

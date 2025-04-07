@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0q60edoivvkh"]
+[gd_scene load_steps=19 format=3 uid="uid://c0q60edoivvkh"]
 
 [ext_resource type="Script" uid="uid://bkwba7cuskf6m" path="res://scripts/objects/crystal/crystal_manager.gd" id="1_choun"]
 [ext_resource type="Script" uid="uid://dicsbgf7qvcmj" path="res://scripts/objects/crystal/crystal_loader.gd" id="2_ya4ey"]
@@ -7,6 +7,8 @@
 [ext_resource type="Resource" uid="uid://c4bwikypa0rb2" path="res://data/beginning.tres" id="5_a8y0u"]
 [ext_resource type="Resource" uid="uid://s683jdnqo5nd" path="res://data/first_levels.tres" id="6_jkv2x"]
 [ext_resource type="Script" uid="uid://cehfa4wtgs3rj" path="res://scripts/core/object_container.gd" id="7_jbj1t"]
+[ext_resource type="Resource" uid="uid://doan73770guv8" path="res://data/difficulty_2.tres" id="7_trceg"]
+[ext_resource type="Resource" uid="uid://deuuuwassk4ax" path="res://data/difficulty_3.tres" id="8_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://d2blx0egodcuv" path="res://scenes/character.tscn" id="8_muem4"]
 [ext_resource type="Shader" uid="uid://chqun1l6n18es" path="res://shaders/crt.gdshader" id="9_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://cqnwl17cwypai" path="res://scenes/ui/main_ui.tscn" id="10_0ld40"]
@@ -71,7 +73,9 @@ load_delay = 2.5
 crystal_loader = NodePath("../CrystalLoader")
 presets = Dictionary[int, ExtResource("4_trceg")]({
 0: ExtResource("5_a8y0u"),
-1: ExtResource("6_jkv2x")
+1: ExtResource("6_jkv2x"),
+2: ExtResource("7_trceg"),
+3: ExtResource("8_a8y0u")
 })
 metadata/_custom_type_script = "uid://c6orute4ufg47"
 

@@ -33,7 +33,7 @@ func load(room: Room):
   var color_amount = min(len(markers)/2, \
     randi_range(room.definition.min_colors, room.definition.max_colors))
   var colors = all_colors.duplicate()
-  pick_random_colors(colors, color_amount)
+  pick_random_colors(colors, len(all_colors)-color_amount)
   var used_colors: Array[CrystalColor] = []
   var matching = true
   var pick: CrystalColor
@@ -43,7 +43,7 @@ func load(room: Room):
         used_colors = colors.duplicate()
       pick = pick_random_color(used_colors)
     var crystal = CRYSTAL.instantiate() as Actor
-    crystal.global_position = marker.global_position
+    crystal.global_position = marker.global_position + Vector2(0,-16)
     Globals.object_container.add_child(crystal)
     _setup_crystal(crystal, pick)
     matching = !matching

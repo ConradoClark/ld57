@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_2yluk")
 difficulty = 1
-files = Array[String](["uid://cmvvh1xtwjybv"])
+files = Array[String](["uid://cmvvh1xtwjybv", "uid://bvxrevyx5pqwh", "uid://cyrvl4v3ua78v", "uid://ept0ojl1f1jf", "uid://dkxi4nyrgijda", "uid://bcgvlgst3rutr", "uid://cxgaoog07hhhw", "uid://di5gvndwskkgd"])
 metadata/_custom_type_script = "uid://dyufqd6n5frbh"
